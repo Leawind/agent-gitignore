@@ -1,0 +1,66 @@
+# ============================================================================
+# agent-gitignore (conservative) — safe on any project
+# https://github.com/Leawind/agent-gitignore
+#
+# A minimal subset: only unambiguous runtime state, caches, and personal
+# files that no harness expects you to commit. Nothing here hides a
+# shareable config — every entry stays precise instead of using blanket
+# wildcards such as `.aider*` or `.zcode/`.
+#
+# See examples/agent.gitignore for the full version, and the repository
+# README for per-harness details and evidence links.
+# ============================================================================
+
+# ---- Aider -----------------------------------------------------------------
+# Runtime history and repo-map cache only; keeps .aider.conf.yml and
+# .aiderignore tracked so they can be shared.
+.aider.chat.history.md
+.aider.input.history
+.aider.llm.history
+.aider.tags.cache.*/
+
+# ---- Claude Code -----------------------------------------------------------
+**/.claude/settings.local.json
+.claude/agent-memory-local/
+CLAUDE.local.md
+
+# ---- CodeBuddy -------------------------------------------------------------
+.codebuddy/settings.local.json
+CODEBUDDY.local.md
+
+# ---- DeepSeek Harness ------------------------------------------------------
+AGENTS.local.md
+CLAUDE.local.md
+
+# ---- Devin Desktop (formerly Windsurf) -------------------------------------
+.devin/config.local.json
+.devin/mcp_config.local.json
+
+# ---- Hermes Agent / Pi -----------------------------------------------------
+AGENTS.override.md
+
+# ---- MiMo Code -------------------------------------------------------------
+.mimocode/cache/
+.mimocode/wiki/
+.mimocode/wikis/
+.mimo-worktrees/
+
+# ---- OpenCode --------------------------------------------------------------
+.opencode/plans/
+.opencode/node_modules/
+.opencode/package.json
+.opencode/package-lock.json
+
+# ---- Qwen Code -------------------------------------------------------------
+.qwen/skills/auto-skill-*/
+.qwen/skills/learned-skill-*/
+.qwen/pending-skills/
+.qwen-session
+
+# ---- Replit ----------------------------------------------------------------
+.local/secondary_skills/
+
+# ---- ZCode -----------------------------------------------------------------
+# Keeps .zcode/skills/ and .zcode/commands/ shareable; only session plans
+# are ignored.
+.zcode/plans/
