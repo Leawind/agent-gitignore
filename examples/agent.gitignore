@@ -55,6 +55,11 @@ CLAUDE.local.md
 .devin/mcp_config.local.json
 # AGENTS.local.md is already covered by the DeepSeek Harness entry above.
 
+# ---- Firebase Studio -------------------------------------------------------
+# Official .gitignore example from the Firebase Studio docs: personal Nix
+# overrides layered on top of .idx/dev.nix.
+.idx/dev.local.nix
+
 # ---- Goose -----------------------------------------------------------------
 # Project memories auto-written by the Memory Extension at .goose/memory/;
 # sessions live in the user data directory.
@@ -124,6 +129,7 @@ AGENTS.override.md
 # .devin/mcp_config.json       # shared MCP servers; strip secrets first
 # .codex/config.toml           # project-level Codex config
 # .iflow/settings.json         # may hold apiKey/baseUrl (iFlow CLI, discontinued)
+# .idx/mcp.json                # Firebase Studio MCP servers
 # .kiro/settings/mcp.json      # workspace MCP servers; use ${VAR} refs or keep local
 # .kilo/tui.json               # personal terminal-UI preferences
 # .kilo/tui.jsonc

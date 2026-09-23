@@ -42,6 +42,9 @@ CLAUDE.local.md
 .devin/config.local.json
 .devin/mcp_config.local.json
 
+# ---- Firebase Studio -------------------------------------------------------
+.idx/dev.local.nix
+
 # ---- Goose -----------------------------------------------------------------
 .goose/memory/
 
