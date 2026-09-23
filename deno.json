@@ -1,5 +1,7 @@
 {
   "tasks": {
+    "fmt": "deno fmt README.md README.zh.md AGENTS.md docs/",
+    "test": "bash scripts/test-gitignore.sh"
   },
   "fmt": {
     "bracePosition": "sameLine",

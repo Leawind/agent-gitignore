@@ -771,6 +771,13 @@ The recurring naming convention for personal files is the `.local.` / `.override
 
 Issues and pull requests are welcome. Maintenance guidelines — entry verification requirements, document structure, ordering conventions — live in [AGENTS.md](AGENTS.md) (currently written in Chinese). If an entry has drifted from the official docs, please open an issue.
 
+Quick rules for contributions:
+
+1. Every entry needs an official documentation page or an official repository as its source — no guessed paths.
+2. Classify each entry as ignore (runtime state, caches, personal overrides), commit (rules, shared configuration), or case by case (may hold secrets or personal preferences).
+3. Keep all four places in sync: both READMEs and both example files, in alphabetical order.
+4. Run `deno task fmt` and `deno task test` before submitting.
+
 ## License
 
 [MIT](LICENSE)

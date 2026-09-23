@@ -771,6 +771,13 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 欢迎提交 Issue 与 Pull Request。维护规范——条目核实要求、文档结构、排序约定——见 [AGENTS.md](AGENTS.md)（当前以中文撰写）。发现条目与官方文档不符，欢迎提 Issue 反馈。
 
+贡献速记：
+
+1. 每个条目必须有官方文档页或官方仓库作为出处，不收录猜测的路径。
+2. 每个条目归入 建议忽略（运行时状态、缓存、个人覆盖）、建议提交（规则、共享配置）、视情况（可能含密钥或个人偏好）之一。
+3. 四处同步：双语 README 与两个示例文件，并保持字母排序。
+4. 提交前运行 `deno task fmt` 与 `deno task test`。
+
 ## 许可证
 
 [MIT](LICENSE)
