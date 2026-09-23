@@ -45,13 +45,16 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Google Antigravity](#google-antigravity) | —                                                                                                       | `.agents/`（旧版 `.agent/`）                                                         | `.agents/` 被多个框架读取，请勿忽略             |
 | [Goose](#goose)                           | `.goose/`                                                                                               | `.goosehints`、`AGENTS.md`                                                           | Memory 扩展自动写入 `.goose/memory/`            |
 | [Hermes Agent](#hermes-agent)             | `AGENTS.override.md`                                                                                    | `.hermes.md`、`HERMES.md`                                                            | 官方注明"typically gitignored"                  |
+| [iFlow CLI](#iflow-cli)                   | —                                                                                                       | `IFLOW.md`、`.iflowignore`                                                           | 2026 年 4 月停服；`settings.json` 可能含密钥    |
 | [Jules](#jules)                           | —                                                                                                       | `AGENTS.md`                                                                          | 云端 VM 工作，通过 PR 交付                      |
 | [Junie](#junie)                           | —                                                                                                       | `.junie/guidelines.md`、`.junie/plans/`                                              | 计划官方明言 "editable, committable"            |
 | [Kilo Code](#kilo-code)                   | —                                                                                                       | `kilo.jsonc`、`.kilo/rules/`、`.kilocodeignore`                                      | `.kilo/tui.json` 属个人偏好                     |
+| [Kimi Code CLI](#kimi-code-cli)           | `.kimi-code/local.toml`                                                                                 | `AGENTS.md`、`.kimi-code/mcp.json`                                                   | 官方明确建议忽略 `local.toml`                   |
 | [Kiro](#kiro)                             | —                                                                                                       | `.kiro/steering/`、`.kiro/specs/`、`.kiro/hooks/`、`.kiroignore`                     | `.kiro/settings/mcp.json` 不得含凭据            |
 | [MiMo Code](#mimo-code)                   | `.mimocode/cache/`、`.mimocode/wiki/`、`.mimocode/wikis/`、`.mimo-worktrees/`                           | `.mimocode/`（配置、技能、工作流）                                                   | 条目与官方仓库自身的 `.gitignore` 一致          |
 | [OpenCode](#opencode)                     | `.opencode/plans/`、`.opencode/node_modules/`、`.opencode/package.json`、`.opencode/package-lock.json`  | `opencode.json`、`.opencode/`（agents、commands、plugins 等）                        | 插件依赖会被自动安装进 `.opencode/`             |
 | [Pi](#pi)                                 | `AGENTS.override.md`                                                                                    | `.pi/`（settings、skills、prompts 等）                                               | 会话保存在 `~/.pi/agent/sessions/`              |
+| [Qoder](#qoder)                           | `.qoder/settings.local.json`、`.qoder/worktrees/`                                                       | `.qoder/rules/`、`.qoder/settings.json`、`.qoder/repowiki/`                          | `rules/` 默认可共享                             |
 | [Qwen Code](#qwen-code)                   | `.qwen/skills/auto-skill-*/`、`.qwen/skills/learned-skill-*/`、`.qwen/pending-skills/`、`.qwen-session` | `QWEN.md`、`.qwen/commands/`、`.qwen/agents/`、`.qwen/team-memory/`                  | 官方仓库以白名单方式忽略 `.qwen/*`              |
 | [Replit](#replit)                         | `.local/`                                                                                               | `.replit`、`replit.nix`、`replit.md`                                                 | 本地 Agent 技能位于 `.local/secondary_skills/`  |
 | [Serena](#serena)                         | `.serena/cache/`、`.serena/project.local.yml`                                                           | `.serena/project.yml`、`.serena/memories/`                                           | 激活时自动生成 `.serena/.gitignore`             |
@@ -274,6 +277,25 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 - `.hermes.md` 或 `HERMES.md` — 最高优先级的项目指令（优先级：`.hermes.md` → `AGENTS.override.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`）
 
+### [iFlow CLI](https://github.com/iflow-ai/iflow-cli)
+
+> 文档: <https://github.com/iflow-ai/iflow-cli>
+
+> iFlow CLI 已于 2026 年 4 月 17 日停止服务，官方建议迁移至 Qoder。以下条目适用于存量仓库。
+
+建议忽略:
+
+- 无官方记载 — 检查点与会话保存在 `~/.iflow/`，从不进入项目的 Git 仓库
+
+建议提交:
+
+- `IFLOW.md` — 由 `/init` 生成的项目上下文
+- `.iflowignore`、`.iflow/sandbox-macos-custom.sb`、`.iflow/sandbox.Dockerfile` — 共享的文件发现与沙箱配置
+
+视情况:
+
+- `.iflow/settings.json` — 项目设置可能含 `apiKey`、`baseUrl` 等字段，含凭据时请留在本地（官方无 .gitignore 建议）
+
 ### [Jules](https://jules.google)
 
 > 文档: <https://jules.google/docs>
@@ -315,6 +337,23 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 视情况:
 
 - `.kilo/tui.json` / `.kilo/tui.jsonc` — 终端 UI 偏好（声音、主题、快捷键），属个人配置
+
+### [Kimi Code CLI](https://github.com/MoonshotAI/kimi-code)
+
+> 文档: <https://moonshotai.github.io/kimi-code/en/configuration/config-files.html>
+
+建议忽略:
+
+- `.kimi-code/local.toml` — 官方原文 "we recommend adding .kimi-code/local.toml to your project's .gitignore so it is not committed"（其中保存本机专属的绝对路径）
+
+建议提交:
+
+- `AGENTS.md` — 由 `/init` 生成和更新
+- `.kimi-code/mcp.json` — 项目级 MCP 服务器
+
+说明:
+
+- 前代 Kimi CLI（`MoonshotAI/kimi-cli`）仓库已归档，其状态完全存放在 `~/.kimi/`
 
 ### [Kiro](https://kiro.dev)
 
@@ -379,6 +418,25 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 说明:
 
 - 会话按工作目录分组保存在 `~/.pi/agent/sessions/`
+
+### [Qoder](https://qoder.com)
+
+> 文档: <https://docs.qoder.com/cli/config-scope>
+
+建议忽略:
+
+- `.qoder/settings.local.json` — 官方原文 "Typically, `.qoder/settings.local.json` should be added to `.gitignore`"
+- `.qoder/worktrees/` — CLI `--worktree` 开关创建的隔离工作树
+
+建议提交:
+
+- `.qoder/rules/`、`.qoder/settings.json`、`.qoder/skills/` — 官方说明适合提交到版本控制仓库
+- `.qoder/repowiki/` — 本地生成的 Repo Wiki；`wiki_plan.yaml` 官方原文 "is shared with the team via Git commits"
+- `AGENTS.md`、`.qoderignore`
+
+视情况:
+
+- `.qoder/rules/` — 若规则仅供本地使用，官方文档建议改为把该目录加入 `.gitignore`
 
 ### [Qwen Code](https://github.com/QwenLM/qwen-code)
 
@@ -501,10 +559,6 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 - 忽略策略文件本身：`.zcodeignore`、`.aiderignore`、`.cursorignore`、`.geminiignore`、`.clineignore`、`.kilocodeignore`
 
 个人文件的通用命名约定是 `.local.` / `.override.` 后缀（`AGENTS.local.md`、`CLAUDE.local.md`、`AGENTS.override.md`）以及 `settings.local.json`——这正是本仓库收集的条目。会话、缓存、计划等运行时状态大多保存在用户主目录，因此表现良好的框架在项目里留下的往往只有可共享的配置。
-
-## 尚未覆盖
-
-中文生态的 Kimi CLI、Qoder、iFlow CLI 等框架是后续收录候选。欢迎贡献，见 [AGENTS.md](AGENTS.md)。
 
 ## 参与贡献
 

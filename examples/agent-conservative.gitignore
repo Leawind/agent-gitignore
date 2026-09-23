@@ -48,6 +48,9 @@ CLAUDE.local.md
 # ---- Hermes Agent / Pi -----------------------------------------------------
 AGENTS.override.md
 
+# ---- Kimi Code CLI ---------------------------------------------------------
+.kimi-code/local.toml
+
 # ---- MiMo Code -------------------------------------------------------------
 .mimocode/cache/
 .mimocode/wiki/
@@ -59,6 +62,9 @@ AGENTS.override.md
 .opencode/node_modules/
 .opencode/package.json
 .opencode/package-lock.json
+
+# ---- Qoder -----------------------------------------------------------------
+.qoder/settings.local.json
 
 # ---- Qwen Code -------------------------------------------------------------
 .qwen/skills/auto-skill-*/

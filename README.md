@@ -45,13 +45,16 @@ On gitignore semantics: patterns without a slash match at any directory level, w
 | [Google Antigravity](#google-antigravity) | —                                                                                                       | `.agents/` (legacy `.agent/`)                                                        | `.agents/` is read by several harnesses; do not ignore it        |
 | [Goose](#goose)                           | `.goose/`                                                                                               | `.goosehints`, `AGENTS.md`                                                           | The Memory Extension auto-writes `.goose/memory/`                |
 | [Hermes Agent](#hermes-agent)             | `AGENTS.override.md`                                                                                    | `.hermes.md`, `HERMES.md`                                                            | Officially "typically gitignored"                                |
+| [iFlow CLI](#iflow-cli)                   | —                                                                                                       | `IFLOW.md`, `.iflowignore`                                                           | Discontinued 2026-04; `settings.json` may hold keys              |
 | [Jules](#jules)                           | —                                                                                                       | `AGENTS.md`                                                                          | Works in a cloud VM; delivers through pull requests              |
 | [Junie](#junie)                           | —                                                                                                       | `.junie/guidelines.md`, `.junie/plans/`                                              | Plans are officially "editable, committable"                     |
 | [Kilo Code](#kilo-code)                   | —                                                                                                       | `kilo.jsonc`, `.kilo/rules/`, `.kilocodeignore`                                      | `.kilo/tui.json` is a personal preference                        |
+| [Kimi Code CLI](#kimi-code-cli)           | `.kimi-code/local.toml`                                                                                 | `AGENTS.md`, `.kimi-code/mcp.json`                                                   | Officially recommends ignoring `local.toml`                      |
 | [Kiro](#kiro)                             | —                                                                                                       | `.kiro/steering/`, `.kiro/specs/`, `.kiro/hooks/`, `.kiroignore`                     | `.kiro/settings/mcp.json` must stay credential-free              |
 | [MiMo Code](#mimo-code)                   | `.mimocode/cache/`, `.mimocode/wiki/`, `.mimocode/wikis/`, `.mimo-worktrees/`                           | `.mimocode/` (config, skills, workflows)                                             | Entries mirror the official repository's own `.gitignore`        |
 | [OpenCode](#opencode)                     | `.opencode/plans/`, `.opencode/node_modules/`, `.opencode/package.json`, `.opencode/package-lock.json`  | `opencode.json`, `.opencode/` (agents, commands, plugins, ...)                       | Plugin dependencies are auto-installed into `.opencode/`         |
 | [Pi](#pi)                                 | `AGENTS.override.md`                                                                                    | `.pi/` (settings, skills, prompts, ...)                                              | Sessions live in `~/.pi/agent/sessions/`                         |
+| [Qoder](#qoder)                           | `.qoder/settings.local.json`, `.qoder/worktrees/`                                                       | `.qoder/rules/`, `.qoder/settings.json`, `.qoder/repowiki/`                          | `rules/` is shareable by default                                 |
 | [Qwen Code](#qwen-code)                   | `.qwen/skills/auto-skill-*/`, `.qwen/skills/learned-skill-*/`, `.qwen/pending-skills/`, `.qwen-session` | `QWEN.md`, `.qwen/commands/`, `.qwen/agents/`, `.qwen/team-memory/`                  | The official repository ignores `.qwen/*` with a whitelist       |
 | [Replit](#replit)                         | `.local/`                                                                                               | `.replit`, `replit.nix`, `replit.md`                                                 | Local Agent skills live in `.local/secondary_skills/`            |
 | [Serena](#serena)                         | `.serena/cache/`, `.serena/project.local.yml`                                                           | `.serena/project.yml`, `.serena/memories/`                                           | Serena writes its own `.serena/.gitignore` on activation         |
@@ -274,6 +277,25 @@ Keep in version control:
 
 - `.hermes.md` or `HERMES.md` — highest-priority project instructions (priority order: `.hermes.md` → `AGENTS.override.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`)
 
+### [iFlow CLI](https://github.com/iflow-ai/iflow-cli)
+
+> Documentation: <https://github.com/iflow-ai/iflow-cli>
+
+> iFlow CLI was discontinued on April 17, 2026, and the vendor recommends migrating to Qoder. The entries below apply to existing repositories.
+
+Recommended to ignore:
+
+- Nothing documented — checkpoints and sessions live in `~/.iflow/` and never enter the project's Git repository
+
+Keep in version control:
+
+- `IFLOW.md` — project context generated by `/init`
+- `.iflowignore`, `.iflow/sandbox-macos-custom.sb`, `.iflow/sandbox.Dockerfile` — shared file-discovery and sandbox configuration
+
+Case by case:
+
+- `.iflow/settings.json` — project settings may hold `apiKey` and `baseUrl`; keep credential-bearing files local (no official gitignore guidance exists)
+
 ### [Jules](https://jules.google)
 
 > Documentation: <https://jules.google/docs>
@@ -315,6 +337,23 @@ Keep in version control:
 Case by case:
 
 - `.kilo/tui.json` / `.kilo/tui.jsonc` — terminal-UI preferences (sounds, theme, keybindings); personal rather than team material
+
+### [Kimi Code CLI](https://github.com/MoonshotAI/kimi-code)
+
+> Documentation: <https://moonshotai.github.io/kimi-code/en/configuration/config-files.html>
+
+Recommended to ignore:
+
+- `.kimi-code/local.toml` — "we recommend adding .kimi-code/local.toml to your project's .gitignore so it is not committed" (it stores machine-specific absolute paths)
+
+Keep in version control:
+
+- `AGENTS.md` — generated and updated via `/init`
+- `.kimi-code/mcp.json` — project-scoped MCP servers
+
+Notes:
+
+- The predecessor Kimi CLI (`MoonshotAI/kimi-cli`) is archived; its state lived entirely in `~/.kimi/`
 
 ### [Kiro](https://kiro.dev)
 
@@ -379,6 +418,25 @@ Keep in version control:
 Notes:
 
 - Sessions live in `~/.pi/agent/sessions/`, grouped by working directory
+
+### [Qoder](https://qoder.com)
+
+> Documentation: <https://docs.qoder.com/cli/config-scope>
+
+Recommended to ignore:
+
+- `.qoder/settings.local.json` — "Typically, `.qoder/settings.local.json` should be added to `.gitignore`"
+- `.qoder/worktrees/` — isolated worktrees created by the CLI's `--worktree` switch
+
+Keep in version control:
+
+- `.qoder/rules/`, `.qoder/settings.json`, `.qoder/skills/` — suitable for committing to the version control repository
+- `.qoder/repowiki/` — locally generated Repo Wiki; `wiki_plan.yaml` "is shared with the team via Git commits"
+- `AGENTS.md`, `.qoderignore`
+
+Case by case:
+
+- `.qoder/rules/` — for local-only rules the documentation recommends adding this directory to `.gitignore` instead
 
 ### [Qwen Code](https://github.com/QwenLM/qwen-code)
 
@@ -501,10 +559,6 @@ These look like harness clutter but are designed to be committed:
 - Ignore-policy files themselves: `.zcodeignore`, `.aiderignore`, `.cursorignore`, `.geminiignore`, `.clineignore`, `.kilocodeignore`
 
 The recurring naming convention for personal files is the `.local.` / `.override.` suffix (`AGENTS.local.md`, `CLAUDE.local.md`, `AGENTS.override.md`) and `settings.local.json`. Those are the entries this repository collects. Runtime state such as sessions, caches, and plans mostly lives in the user home directory, so a well-behaved harness leaves little more than shareable configuration in your project.
-
-## Not Yet Covered
-
-Chinese-ecosystem harnesses such as Kimi CLI, Qoder, and iFlow CLI are candidates for future coverage. Contributions are welcome — see [AGENTS.md](AGENTS.md).
 
 ## Contributing
 

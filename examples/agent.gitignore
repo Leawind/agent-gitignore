@@ -64,6 +64,11 @@ CLAUDE.local.md
 # Personal, per-directory override of AGENTS.md ("typically gitignored").
 AGENTS.override.md
 
+# ---- Kimi Code CLI ---------------------------------------------------------
+# Officially recommended: "we recommend adding .kimi-code/local.toml to your
+# project's .gitignore so it is not committed".
+.kimi-code/local.toml
+
 # ---- MiMo Code -------------------------------------------------------------
 # Local state ignored by the official MiMo-Code repository itself.
 .mimocode/cache/
@@ -78,6 +83,12 @@ AGENTS.override.md
 .opencode/node_modules/
 .opencode/package.json
 .opencode/package-lock.json
+
+# ---- Qoder -----------------------------------------------------------------
+# Officially "should be added to .gitignore", plus the isolated worktrees
+# created by the CLI's --worktree switch.
+.qoder/settings.local.json
+.qoder/worktrees/
 
 # ---- Qwen Code -------------------------------------------------------------
 # Auto-generated skills, the pending-skills staging area, and the
@@ -112,6 +123,7 @@ AGENTS.override.md
 # .gemini/settings.json        # may contain personal settings
 # .devin/mcp_config.json       # shared MCP servers; strip secrets first
 # .codex/config.toml           # project-level Codex config
+# .iflow/settings.json         # may hold apiKey/baseUrl (iFlow CLI, discontinued)
 # .kiro/settings/mcp.json      # workspace MCP servers; use ${VAR} refs or keep local
 # .kilo/tui.json               # personal terminal-UI preferences
 # .kilo/tui.jsonc
