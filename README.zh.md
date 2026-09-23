@@ -31,15 +31,19 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | 工具                                      | 建议忽略                                                                                                | 建议提交                                                                             | 备注                                            |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------- |
 | [Aider](#aider)                           | `.aider*`                                                                                               | `.aider.conf.yml`、`.aiderignore`（如需共享）                                        | Aider 默认自动把 `.aider*` 写入 `.gitignore`    |
+| [Amazon Q Developer](#amazon-q-developer) | —                                                                                                       | `.amazonq/rules/`、`.amazonq/cli-agents/`                                            | 含 MCP 凭据的 agent JSON 走环境变量             |
 | [Amp](#amp)                               | —                                                                                                       | `.amp/settings.json`、`.agents/setup`、`.agents/resume`                              | 线程保存在 Amp 服务端                           |
 | [Augment Code](#augment-code)             | `.augment/settings.local.json`                                                                          | `.augment/settings.json`、`.augment/rules/`、`.augment-guidelines`、`.augmentignore` | `settings.local.json` 官方自动加入 `.gitignore` |
 | [Claude Code](#claude-code)               | `CLAUDE.local.md`、`.claude/settings.local.json`、`.claude/agent-memory-local/`                         | `CLAUDE.md`、`.mcp.json`、`.claude/` 其余内容                                        | `settings.local.json` 自动进全局 git 排除       |
 | [Cline](#cline)                           | —                                                                                                       | `.clinerules/` 或 `.cline/`、`.clineignore`                                          | 运行时状态保存在 `~/.cline/`                    |
 | [CodeBuddy](#codebuddy)                   | `.codebuddy/settings.local.json`、`CODEBUDDY.local.md`                                                  | `CODEBUDDY.md`、`.codebuddy/` 其余内容                                               | `settings.local.json` 官方自动加入 `.gitignore` |
+| [Codebuff](#codebuff)                     | —                                                                                                       | `knowledge.md`、`.agents/`                                                           | 默认跳过 `.gitignore` 命中的文件                |
 | [Codex](#codex)                           | —                                                                                                       | `AGENTS.md`、`.codex/skills/`、`.agents/skills/`                                     | `.codex/config.toml` 视内容而定                 |
+| [Continue](#continue)                     | —                                                                                                       | `.continue/rules/`                                                                   | 索引缓存位于 `~/.continue/index`                |
 | [Crush](#crush)                           | `.crush/`                                                                                               | `.crushrc`、`.crushignore`、`crush.json`（已弃用）                                   | 日志落在 `.crush/logs/`，会话在用户数据目录     |
 | [Cursor](#cursor)                         | —                                                                                                       | `.cursor/rules/`、`.cursorignore`                                                    | `.cursor/mcp.json` 可能含密钥                   |
 | [DeepSeek Harness](#deepseek-harness)     | `AGENTS.local.md`、`CLAUDE.local.md`                                                                    | `AGENTS.md`、`CLAUDE.md`                                                             | 本地覆盖文件"刻意不提交"                        |
+| [Devin](#devin)                           | —                                                                                                       | `.devin/wiki.json`、`AGENTS.md`                                                      | 云端代理；CLI 本地条目见 Windsurf 章节          |
 | [Gemini CLI](#gemini-cli)                 | —                                                                                                       | `GEMINI.md`、`.gemini/settings.json`、`.gemini/commands/`                            | 检查点保存在 `~/.gemini/`，不进项目             |
 | [GitHub Copilot](#github-copilot)         | —                                                                                                       | `.github/copilot-instructions.md`、`.github/instructions/`                           | CLI 运行时数据保存在 `~/.copilot/`              |
 | [Google Antigravity](#google-antigravity) | —                                                                                                       | `.agents/`（旧版 `.agent/`）                                                         | `.agents/` 被多个框架读取，请勿忽略             |
@@ -47,16 +51,18 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Hermes Agent](#hermes-agent)             | `AGENTS.override.md`                                                                                    | `.hermes.md`、`HERMES.md`                                                            | 官方注明"typically gitignored"                  |
 | [iFlow CLI](#iflow-cli)                   | —                                                                                                       | `IFLOW.md`、`.iflowignore`                                                           | 2026 年 4 月停服；`settings.json` 可能含密钥    |
 | [Jules](#jules)                           | —                                                                                                       | `AGENTS.md`                                                                          | 云端 VM 工作，通过 PR 交付                      |
-| [Junie](#junie)                           | —                                                                                                       | `.junie/guidelines.md`、`.junie/plans/`                                              | 计划官方明言 "editable, committable"            |
+| [Junie](#junie)                           | —                                                                                                       | `.junie/AGENTS.md`、`.junie/plans/`                                                  | 计划官方明言 "editable, committable"            |
 | [Kilo Code](#kilo-code)                   | —                                                                                                       | `kilo.jsonc`、`.kilo/rules/`、`.kilocodeignore`                                      | `.kilo/tui.json` 属个人偏好                     |
 | [Kimi Code CLI](#kimi-code-cli)           | `.kimi-code/local.toml`                                                                                 | `AGENTS.md`、`.kimi-code/mcp.json`                                                   | 官方明确建议忽略 `local.toml`                   |
 | [Kiro](#kiro)                             | —                                                                                                       | `.kiro/steering/`、`.kiro/specs/`、`.kiro/hooks/`、`.kiroignore`                     | `.kiro/settings/mcp.json` 不得含凭据            |
 | [MiMo Code](#mimo-code)                   | `.mimocode/cache/`、`.mimocode/wiki/`、`.mimocode/wikis/`、`.mimo-worktrees/`                           | `.mimocode/`（配置、技能、工作流）                                                   | 条目与官方仓库自身的 `.gitignore` 一致          |
 | [OpenCode](#opencode)                     | `.opencode/plans/`、`.opencode/node_modules/`、`.opencode/package.json`、`.opencode/package-lock.json`  | `opencode.json`、`.opencode/`（agents、commands、plugins 等）                        | 插件依赖会被自动安装进 `.opencode/`             |
+| [OpenHands](#openhands)                   | —                                                                                                       | `.openhands/`、`.agents/skills/`、`AGENTS.md`                                        | 旧版 `.openhands/microagents/` 仍受支持         |
 | [Pi](#pi)                                 | `AGENTS.override.md`                                                                                    | `.pi/`（settings、skills、prompts 等）                                               | 会话保存在 `~/.pi/agent/sessions/`              |
 | [Qoder](#qoder)                           | `.qoder/settings.local.json`、`.qoder/worktrees/`                                                       | `.qoder/rules/`、`.qoder/settings.json`、`.qoder/repowiki/`                          | `rules/` 默认可共享                             |
 | [Qwen Code](#qwen-code)                   | `.qwen/skills/auto-skill-*/`、`.qwen/skills/learned-skill-*/`、`.qwen/pending-skills/`、`.qwen-session` | `QWEN.md`、`.qwen/commands/`、`.qwen/agents/`、`.qwen/team-memory/`                  | 官方仓库以白名单方式忽略 `.qwen/*`              |
 | [Replit](#replit)                         | `.local/`                                                                                               | `.replit`、`replit.nix`、`replit.md`                                                 | 本地 Agent 技能位于 `.local/secondary_skills/`  |
+| [Roo Code](#roo-code)                     | —                                                                                                       | `.roo/rules/`、`.roomodes`、`.rooignore`                                             | `.roo/rules/` 设计为版本控制                    |
 | [Serena](#serena)                         | `.serena/cache/`、`.serena/project.local.yml`                                                           | `.serena/project.yml`、`.serena/memories/`                                           | 激活时自动生成 `.serena/.gitignore`             |
 | [Trae](#trae)                             | —                                                                                                       | `.trae/rules/`                                                                       | 记忆数据保存在用户主目录                        |
 | [Windsurf](#windsurf)                     | `AGENTS.local.md`、`.devin/config.local.json`、`.devin/mcp_config.local.json`                           | `.devin/`（rules、skills、config）、`.windsurf/`（旧版）                             | 2026 年 6 月更名为 Devin Desktop                |
@@ -77,6 +83,23 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 - `.aider.conf.yml` — 放在仓库根目录即为团队共享配置
 - `.aiderignore` — 声明 Aider 不应触碰的文件
+
+### [Amazon Q Developer](https://aws.amazon.com/q/developer/)
+
+> 文档: <https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/context-project-rules.html>
+
+建议忽略:
+
+- 无官方记载
+
+建议提交:
+
+- `.amazonq/rules/*.md` — 项目规则；官方文档流程明确 "Commit, review, and merge your changes"
+- `.amazonq/cli-agents/*.json` — 工作区级 agent 配置，官方说明通过 "via version control" 与团队共享（旧版 `.amazonq/mcp.json` 已并入这些 agent 文件）
+
+视情况:
+
+- 含 MCP 凭据的 agent JSON — 官方建议 "Use environment variables for sensitive configuration"，密钥不进已提交的文件
 
 ### [Amp](https://ampcode.com)
 
@@ -148,6 +171,24 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 - `CODEBUDDY.md`、`.codebuddy/settings.json`、`.codebuddy/agents/`、`.codebuddy/rules/`、`.codebuddy/skills/`、`.codebuddy/commands/`
 
+### [Codebuff](https://www.codebuff.com)
+
+> 文档: <https://www.codebuff.com/docs/tips/knowledge-files>
+
+建议忽略:
+
+- 无官方记载
+
+建议提交:
+
+- `knowledge.md` — 由 `/init` 生成，紧邻其描述的代码存放
+- `.agents/` — 自定义 TypeScript agent 与 `.agents/skills/`
+
+说明:
+
+- Codebuff 默认跳过 `.gitignore` 命中的文件；`.codebuffignore` 可追加排除
+- 旧版本的 `.codebuff/` 目录结构已废弃
+
 ### [Codex](https://github.com/openai/codex)
 
 > 文档: <https://developers.openai.com/codex/guides/agents-md>
@@ -163,6 +204,22 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 视情况:
 
 - `.codex/config.toml` — 项目级配置层；钩子与权限可共享，个人设置请留在本地（官方尚无 `.local` 约定）
+
+### [Continue](https://continue.dev)
+
+> 文档: <https://docs.continue.dev/customize/rules>
+
+建议忽略:
+
+- 无 — 索引缓存位于 `~/.continue/index`，在项目之外
+
+建议提交:
+
+- `.continue/rules/*.md` — 项目规则，官方说明 "Version controlled alongside your code"
+
+视情况:
+
+- `.continueignore` — 官方原文 "follows the exact same rules as .gitignore"；官方仅定义功能，未表态是否提交
 
 ### [Crush](https://github.com/charmbracelet/crush)
 
@@ -206,6 +263,19 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `AGENTS.md`、`CLAUDE.md` — 从项目根到会话目录逐层加载的基础指令
+
+### [Devin](https://devin.ai)
+
+> 文档: <https://docs.devin.ai>
+
+建议忽略:
+
+- 云端代理本身无本地产物 — 它在自己的 VM 中工作、通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 Windsurf 章节覆盖
+
+建议提交:
+
+- `.devin/wiki.json` — DeepWiki 定制；官方原文 "Commit the file and regenerate your wiki"
+- `AGENTS.md` — 官方说明 "Devin will look for the file before it starts coding"
 
 ### [Gemini CLI](https://geminicli.com)
 
@@ -318,7 +388,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议提交:
 
-- `.junie/guidelines.md`（或 `.junie/AGENTS.md`）— 团队编码规范
+- `.junie/AGENTS.md` — 团队编码规范；旧版 `.junie/guidelines.md` 仍受支持
 - `.junie/plans/` — 官方明言 "editable, committable" 的可持续维护任务文档
 
 ### [Kilo Code](https://kilo.ai)
@@ -403,6 +473,21 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 - `.opencode/agents/`、`.opencode/commands/`、`.opencode/plugins/`、`.opencode/skills/`、`.opencode/tools/`、`.opencode/themes/`
 - `AGENTS.md` — 官方原文 "You should commit your project's AGENTS.md file to Git"
 
+### [OpenHands](https://github.com/All-Hands-AI/OpenHands)
+
+> 文档: <https://docs.openhands.dev/openhands/usage/customization/repository>
+
+建议忽略:
+
+- 无官方记载
+
+建议提交:
+
+- `.openhands/setup.sh` — OpenHands 每次开始处理该仓库时运行
+- `.openhands/hooks.json`、`.openhands/hooks/` — 生命周期钩子
+- `.agents/skills/` — 推荐的仓库技能位置；旧版 `.openhands/skills/` 与 `.openhands/microagents/` 仍受支持
+- `AGENTS.md` — 始终作为仓库上下文加载
+
 ### [Pi](https://pi.dev)
 
 > 文档: <https://pi.dev/docs/latest/configuration>
@@ -473,6 +558,24 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 - `replit.md` — 由 Replit Agent 自动维护；含团队约定时提交
 - `.agents/skills/` — 已安装技能是常规文件，可共享
+
+### [Roo Code](https://roocode.com)
+
+> 文档: <https://roocodeinc.github.io/Roo-Code/features/custom-instructions>
+
+建议忽略:
+
+- 无官方记载
+
+建议提交:
+
+- `.roo/rules/`、`.roo/rules-{mode}/` — 官方原文 "under version control to standardize Roo's behavior for specific projects"
+- `.roomodes` — 项目级自定义模式
+- `.rooignore`、`AGENTS.md`
+
+视情况:
+
+- `.roorules` — 规则的单文件回退形式；按惯例可共享，但官方版本控制指引针对目录形式
 
 ### [Serena](https://github.com/oraios/serena)
 
