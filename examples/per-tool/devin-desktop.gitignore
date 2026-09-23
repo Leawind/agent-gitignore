@@ -1,0 +1,7 @@
+# Devin Desktop (formerly Windsurf) — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Officially labeled "No (gitignored)"; personal overrides and local secrets.
+.devin/config.local.json
+.devin/mcp_config.local.json
+# AGENTS.local.md is already covered by the DeepSeek Harness entry above.
+

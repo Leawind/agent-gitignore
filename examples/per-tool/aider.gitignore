@@ -1,0 +1,9 @@
+# Aider — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Official default: `--gitignore` is on by default, so aider writes `.aider*`
+# into .gitignore on first run (chat history, input history, tags cache, ...).
+.aider*
+# Prefer sharing Aider config with the team? Un-comment the lines below:
+# !.aider.conf.yml
+# !.aiderignore
+

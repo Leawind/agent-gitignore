@@ -1,0 +1,6 @@
+# Goose — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Project memories auto-written by the Memory Extension at .goose/memory/;
+# sessions live in the user data directory.
+.goose/
+

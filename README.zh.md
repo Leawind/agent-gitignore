@@ -25,6 +25,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 - [examples/agent.gitignore](examples/agent.gitignore) — 完整版。凡有官方默认值之处遵循官方默认（例如 Aider 会自行忽略 `.aider*`），需要视情况处理的条目以注释形式标注。
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — 保守版，只含无歧义的运行时状态、缓存和个人文件，不会误伤任何可共享配置。
+- [examples/per-tool/](examples/per-tool/) — 每个框架一个可直接复制的片段文件，由合并文件自动生成（修改合并文件后运行 `bash scripts/build-per-tool.sh`）。
 
 关于 gitignore 语法：不带斜杠的模式在任意目录层级生效；`**/` 前缀可覆盖嵌套目录的每一层，因此 `**/.claude/settings.local.json` 对嵌套工作树同样有效。
 

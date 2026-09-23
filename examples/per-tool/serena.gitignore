@@ -1,0 +1,8 @@
+# Serena — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Language-server cache and the local config override. Serena writes its own
+# .serena/.gitignore with these entries on first activation; these lines
+# protect you before that happens.
+.serena/cache/
+.serena/project.local.yml
+

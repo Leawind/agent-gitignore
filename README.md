@@ -25,6 +25,7 @@ Two flavors are available:
 
 - [examples/agent.gitignore](examples/agent.gitignore) — the full version. Follows official defaults where they exist (for example, Aider ignores `.aider*` by itself) and marks case-by-case entries as comments.
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — a minimal subset: only unambiguous runtime state, caches, and personal files. Nothing here hides a shareable config.
+- [examples/per-tool/](examples/per-tool/) — one ready-to-copy file per harness, generated from the combined file (run `bash scripts/build-per-tool.sh` after changing it).
 
 On gitignore semantics: patterns without a slash match at any directory level, while a `**/` prefix covers every level of nested directories — so `**/.claude/settings.local.json` also protects nested worktrees.
 

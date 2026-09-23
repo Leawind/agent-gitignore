@@ -1,0 +1,5 @@
+# Replit — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Locally installed Agent skills outside version control.
+.local/
+

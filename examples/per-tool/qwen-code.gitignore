@@ -1,0 +1,9 @@
+# Qwen Code — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Auto-generated skills, the pending-skills staging area, and the
+# developer-local session identifier created by `qwen serve`.
+.qwen/skills/auto-skill-*/
+.qwen/skills/learned-skill-*/
+.qwen/pending-skills/
+.qwen-session
+

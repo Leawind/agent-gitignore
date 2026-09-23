@@ -1,0 +1,6 @@
+# DeepSeek Harness — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Additive local overlays, "deliberately not committed" per the official docs.
+AGENTS.local.md
+CLAUDE.local.md
+

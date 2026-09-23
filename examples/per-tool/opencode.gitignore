@@ -1,0 +1,9 @@
+# OpenCode — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Plan files written by plan mode, plus the plugin dependencies that
+# OpenCode auto-installs into .opencode/ once the directory exists.
+.opencode/plans/
+.opencode/node_modules/
+.opencode/package.json
+.opencode/package-lock.json
+

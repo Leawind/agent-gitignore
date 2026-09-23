@@ -1,0 +1,6 @@
+# Crush — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Runtime logs (./.crush/logs/crush.log); session state lives in the user
+# data directory outside the project.
+.crush/
+

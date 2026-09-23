@@ -31,6 +31,7 @@
 - `examples/agent.gitignore`：完整版，遵循官方默认，视情况条目以注释列出。
 - `examples/agent-conservative.gitignore`：保守版，只含无歧义的运行时产物，不使用 `.aider*` 这类粗粒度通配。
 - 两个文件的条目、注释必须与 README 详情章节保持一致，更新时四处同步（双语 README + 两个示例文件）。
+- `examples/per-tool/` 下的片段文件由 `scripts/build-per-tool.sh` 从合并文件自动生成，禁止手工编辑；修改合并文件后重新生成（CI 会校验同步）。
 - 修改示例文件后运行 `bash scripts/test-gitignore.sh` 做回归验证（GitHub Actions 会在每次推送时自动执行）。
 
 ## 新增/更新工具流程

@@ -1,0 +1,5 @@
+# Hermes Agent / Pi — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Personal, per-directory override of AGENTS.md ("typically gitignored").
+AGENTS.override.md
+

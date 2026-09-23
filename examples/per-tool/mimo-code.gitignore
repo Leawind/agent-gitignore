@@ -1,0 +1,8 @@
+# MiMo Code — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Local state ignored by the official MiMo-Code repository itself.
+.mimocode/cache/
+.mimocode/wiki/
+.mimocode/wikis/
+.mimo-worktrees/
+

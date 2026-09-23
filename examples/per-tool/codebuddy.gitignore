@@ -1,0 +1,6 @@
+# CodeBuddy — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Officially labeled "Auto-added to .gitignore".
+.codebuddy/settings.local.json
+CODEBUDDY.local.md
+

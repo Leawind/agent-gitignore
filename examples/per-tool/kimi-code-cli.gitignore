@@ -1,0 +1,6 @@
+# Kimi Code CLI — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Officially recommended: "we recommend adding .kimi-code/local.toml to your
+# project's .gitignore so it is not committed".
+.kimi-code/local.toml
+

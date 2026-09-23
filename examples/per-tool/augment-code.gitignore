@@ -1,0 +1,5 @@
+# Augment Code — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Officially "Automatically added to .gitignore and should not be committed".
+.augment/settings.local.json
+

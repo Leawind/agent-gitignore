@@ -1,0 +1,6 @@
+# ZCode — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Session data such as plan files. If you share workspace skills/commands
+# through .zcode/, ignore only .zcode/plans/ instead.
+.zcode/
+

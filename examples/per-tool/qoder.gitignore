@@ -1,0 +1,7 @@
+# Qoder — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Officially "should be added to .gitignore", plus the isolated worktrees
+# created by the CLI's --worktree switch.
+.qoder/settings.local.json
+.qoder/worktrees/
+

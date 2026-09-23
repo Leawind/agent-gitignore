@@ -1,0 +1,6 @@
+# Firebase Studio — generated from examples/agent.gitignore
+# Do not edit: change the combined file and run scripts/build-per-tool.sh
+# Official .gitignore example from the Firebase Studio docs: personal Nix
+# overrides layered on top of .idx/dev.nix.
+.idx/dev.local.nix
+
