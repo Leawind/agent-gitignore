@@ -3,9 +3,9 @@
 
 # agent-gitignore
 
-AI coding harnesses — Claude Code, Cursor, Aider, Qwen Code and friends — leave things behind in your workspace: chat histories, plan files, caches, auto-generated skills, and personal settings. Most of it should stay out of version control. Meanwhile, a few files that look like clutter — `AGENTS.md`, `.agents/`, `.zcodeignore` — are designed to be committed.
+AI coding harnesses — CLI agents and IDE assistants such as Claude Code, Cursor, Aider, and Qwen Code — leave things behind in your workspace: chat histories, plan files, caches, auto-generated skills, and personal settings. Most of it should stay out of version control. Meanwhile, a few files that look like clutter — `AGENTS.md`, `.agents/`, `.zcodeignore` — are designed to be committed.
 
-This repository collects the files that common AI coding harnesses create in a workspace but you probably don't want in version control, verifies every entry against official documentation, and provides ready-to-use example `.gitignore` files.
+This repository collects the workspace artifacts of 40+ AI coding harnesses, verifies every entry against official documentation, and provides ready-to-use example `.gitignore` files. Entries were last verified against upstream documentation in September 2026.
 
 ## Quick Start
 
@@ -19,12 +19,16 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/examples/agent.gitignore >> .gitignore
 ```
 
+Appending is not idempotent — run it once, or paste only the sections you need. Entries inside a directory that your existing `.gitignore` already excludes will not take effect.
+
 Two flavors are available:
 
 - [examples/agent.gitignore](examples/agent.gitignore) — the full version. Follows official defaults where they exist (for example, Aider ignores `.aider*` by itself) and marks case-by-case entries as comments.
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — a minimal subset: only unambiguous runtime state, caches, and personal files. Nothing here hides a shareable config.
 
 On gitignore semantics: patterns without a slash match at any directory level, while a `**/` prefix covers every level of nested directories — so `**/.claude/settings.local.json` also protects nested worktrees.
+
+Every entry below carries one of three verdicts: **ignore** — runtime state, caches, and personal overrides that should stay local; **commit** — rules, skills, and shared configuration designed for version control; **case by case** — files that may hold secrets or personal preferences, so read the entry before committing. Where a harness leaves nothing behind in the project, sections say **Nothing** (confirmed: runtime state lives outside the project) or **Nothing documented** (the official docs describe no project artifacts).
 
 ## Overview
 
@@ -304,7 +308,7 @@ Keep in version control:
 
 Recommended to ignore:
 
-- Nothing by itself — the cloud agent works in its own VM and delivers through pull requests; the Devin CLI's personal files (`.devin/config.local.json`, `.devin/mcp_config.local.json`) are already covered in the Windsurf section
+- Nothing by itself — the cloud agent works in its own VM and delivers through pull requests; the Devin CLI's personal files (`.devin/config.local.json`, `.devin/mcp_config.local.json`) are already covered in the [Windsurf](#windsurf) section
 
 Keep in version control:
 
@@ -376,7 +380,7 @@ Keep in version control:
 
 Notes:
 
-- Do not ignore `.agents/` — Codex, Zed, and Replit read the same directory for skills
+- Do not ignore `.agents/` — [Codex](#codex), [Zed](#zed), and [Replit](#replit) read the same directory for skills
 
 ### [Goose](https://goose-docs.ai)
 
@@ -725,7 +729,7 @@ Notes:
 - Windsurf was renamed Devin Desktop in June 2026; the CLI auto-excludes `*.local.json` files via `.git/info/exclude`
 - Cascade memories live in `~/.codeium/windsurf/memories/` and never enter the repository
 
-### ZCode
+### [ZCode](https://zcode.z.ai)
 
 > Documentation: <https://zcode.z.ai> — the public documentation does not describe these workspace paths; entries below reflect observed behavior in local workspaces
 
@@ -765,7 +769,7 @@ The recurring naming convention for personal files is the `.local.` / `.override
 
 ## Contributing
 
-Issues and pull requests are welcome. Maintenance guidelines — entry verification requirements, document structure, ordering conventions — live in [AGENTS.md](AGENTS.md).
+Issues and pull requests are welcome. Maintenance guidelines — entry verification requirements, document structure, ordering conventions — live in [AGENTS.md](AGENTS.md) (currently written in Chinese). If an entry has drifted from the official docs, please open an issue.
 
 ## License
 

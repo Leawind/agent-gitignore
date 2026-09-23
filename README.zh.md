@@ -3,9 +3,9 @@
 
 # agent-gitignore
 
-AI 编码框架（harness）——Claude Code、Cursor、Aider、Qwen Code 等——会在工作区里留下各种杂物：对话历史、计划文件、缓存、自动生成的技能、个人设置，它们大多不应进入版本控制。与此同时，一些看起来像杂物的文件——`AGENTS.md`、`.agents/`、`.zcodeignore`——恰恰是设计为提交共享的。
+AI 编码框架（harness，即 CLI 智能体与 IDE 助手）——Claude Code、Cursor、Aider、Qwen Code 等——会在工作区里留下各种杂物：对话历史、计划文件、缓存、自动生成的技能、个人设置，它们大多不应进入版本控制。与此同时，一些看起来像杂物的文件——`AGENTS.md`、`.agents/`、`.zcodeignore`——恰恰是设计为提交共享的。
 
-本仓库收集常见 AI 编码框架会在工作区创建，但很可能不希望纳入版本控制的文件，每一条目均经官方文档核实，并提供可直接使用的示例 `.gitignore` 文件。
+本仓库收集 40+ 个 AI 编码框架的工作区产物，每一条目均经官方文档核实，并提供可直接使用的示例 `.gitignore` 文件。条目最后核对官方文档的时间为 2026 年 9 月。
 
 ## 快速开始
 
@@ -19,12 +19,16 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/examples/agent.gitignore >> .gitignore
 ```
 
+追加合并非幂等 — 请只执行一次，或仅粘贴你需要的部分。若已有的 `.gitignore` 排除了某个父目录，其内部条目将不会生效。
+
 提供两种版本：
 
 - [examples/agent.gitignore](examples/agent.gitignore) — 完整版。凡有官方默认值之处遵循官方默认（例如 Aider 会自行忽略 `.aider*`），需要酌情判断的条目以注释形式标注。
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — 保守版，只含无歧义的运行时状态、缓存和个人文件，不会误伤任何可共享配置。
 
 关于 gitignore 语法：不带斜杠的模式在任意目录层级生效；`**/` 前缀可覆盖嵌套目录的每一层，因此 `**/.claude/settings.local.json` 对嵌套工作树同样有效。
+
+下文每个条目都有三种判定之一：**建议忽略** — 应留在本地的运行时状态、缓存与个人覆盖文件；**建议提交** — 为版本控制而设计的规则、技能与共享配置；**视情况** — 可能含密钥或个人偏好，提交前请先阅读条目。当框架不在项目内留下任何东西时，章节会写 **无**（已核实：运行时状态保存在项目之外）或 **无官方记载**（官方文档未描述任何项目内产物）。
 
 ## 总览
 
@@ -304,7 +308,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- 云端代理本身无本地产物 — 它在自己的 VM 中工作，通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 Windsurf 章节覆盖
+- 云端代理本身无本地产物 — 它在自己的 VM 中工作，通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 [Windsurf](#windsurf) 章节覆盖
 
 建议提交:
 
@@ -376,7 +380,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 说明:
 
-- 请勿忽略 `.agents/` — Codex、Zed、Replit 等框架会读取同一目录下的技能
+- 请勿忽略 `.agents/` — [Codex](#codex)、[Zed](#zed)、[Replit](#replit) 等框架会读取同一目录下的技能
 
 ### [Goose](https://goose-docs.ai)
 
@@ -725,7 +729,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 - Windsurf 已于 2026 年 6 月更名为 Devin Desktop；CLI 会通过 `.git/info/exclude` 自动排除 `*.local.json` 文件
 - Cascade 记忆保存在 `~/.codeium/windsurf/memories/`，从不进入仓库
 
-### ZCode
+### [ZCode](https://zcode.z.ai)
 
 > 文档: <https://zcode.z.ai> — 公开文档未记载这些工作区路径；以下条目基于本地工作区的实际观察
 
@@ -765,7 +769,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 ## 参与贡献
 
-欢迎提交 Issue 与 Pull Request。维护规范——条目核实要求、文档结构、排序约定——见 [AGENTS.md](AGENTS.md)。
+欢迎提交 Issue 与 Pull Request。维护规范——条目核实要求、文档结构、排序约定——见 [AGENTS.md](AGENTS.md)（当前以中文撰写）。发现条目与官方文档不符，欢迎提 Issue 反馈。
 
 ## 许可证
 
