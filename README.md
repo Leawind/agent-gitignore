@@ -3,7 +3,7 @@
 
 # agent-gitignore
 
-AI coding harnesses — CLI agents and IDE assistants such as Claude Code, Cursor, Aider, and Qwen Code — leave things behind in your workspace: chat histories, plan files, caches, auto-generated skills, and personal settings. Most of it should stay out of version control. Meanwhile, a few files that look like clutter — `AGENTS.md`, `.agents/`, `.zcodeignore` — are designed to be committed.
+AI coding harnesses — CLI agents, IDE assistants, and review agents such as Claude Code, Cursor, CodeRabbit, and Qwen Code — leave things behind in your workspace: chat histories, plan files, caches, auto-generated skills, and personal settings. Most of it should stay out of version control. Meanwhile, a few files that look like clutter — `AGENTS.md`, `.agents/`, `.zcodeignore` — are designed to be committed.
 
 This repository collects the workspace artifacts of 40+ AI coding harnesses, verifies every entry against official documentation, and provides ready-to-use example `.gitignore` files. Entries were last verified against upstream documentation in September 2026.
 
@@ -32,52 +32,55 @@ Every entry below carries one of three verdicts: **ignore** — runtime state, c
 
 ## Overview
 
-| Harness                                   | Recommended to ignore                                                                                   | Designed to be committed                                                             | Notes                                                             |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| [Aider](#aider)                           | `.aider*`                                                                                               | `.aider.conf.yml`, `.aiderignore` (if shared)                                        | Aider writes `.aider*` into `.gitignore` by default               |
-| [Amazon Q Developer](#amazon-q-developer) | —                                                                                                       | `.amazonq/rules/`, `.amazonq/cli-agents/`                                            | Agent JSONs with MCP credentials belong in env vars               |
-| [Amp](#amp)                               | —                                                                                                       | `.amp/settings.json`, `.agents/setup`, `.agents/resume`                              | Threads live on Amp's servers                                     |
-| [Augment Code](#augment-code)             | `.augment/settings.local.json`                                                                          | `.augment/settings.json`, `.augment/rules/`, `.augment-guidelines`, `.augmentignore` | `settings.local.json` is auto-added to `.gitignore`               |
-| [Baidu Comate](#baidu-comate)             | —                                                                                                       | `.comate/rules/`                                                                     | Project rules are shared; personal rules are private              |
-| [Claude Code](#claude-code)               | `CLAUDE.local.md`, `.claude/settings.local.json`, `.claude/agent-memory-local/`                         | `CLAUDE.md`, `.mcp.json`, everything else in `.claude/`                              | `settings.local.json` is auto-excluded via global excludes        |
-| [Cline](#cline)                           | —                                                                                                       | `.clinerules/` or `.cline/`, `.clineignore`                                          | Runtime state lives in `~/.cline/`                                |
-| [CodeBuddy](#codebuddy)                   | `.codebuddy/settings.local.json`, `CODEBUDDY.local.md`                                                  | `CODEBUDDY.md`, everything else in `.codebuddy/`                                     | `settings.local.json` is auto-added to `.gitignore`               |
-| [Codebuff](#codebuff)                     | —                                                                                                       | `knowledge.md`, `.agents/`                                                           | Skips `.gitignore`d files by default                              |
-| [CodeGeeX](#codegeex)                     | —                                                                                                       | —                                                                                    | No project artifacts in official docs                             |
-| [Codex](#codex)                           | —                                                                                                       | `AGENTS.md`, `.codex/skills/`, `.agents/skills/`                                     | `.codex/config.toml` depends on its content                       |
-| [Continue](#continue)                     | —                                                                                                       | `.continue/rules/`                                                                   | Index cache lives in `~/.continue/index`                          |
-| [Crush](#crush)                           | `.crush/`                                                                                               | `.crushrc`, `.crushignore`, `crush.json` (deprecated)                                | Logs land in `.crush/logs/`; sessions in the user data directory  |
-| [Cursor](#cursor)                         | —                                                                                                       | `.cursor/rules/`, `.cursorignore`                                                    | `.cursor/mcp.json` may hold secrets                               |
-| [DeepSeek Harness](#deepseek-harness)     | `AGENTS.local.md`, `CLAUDE.local.md`                                                                    | `AGENTS.md`, `CLAUDE.md`                                                             | Local overlays are "deliberately not committed"                   |
-| [Devin](#devin)                           | —                                                                                                       | `.devin/wiki.json`, `AGENTS.md`                                                      | Cloud agent; CLI locals covered under Windsurf                    |
-| [Firebase Studio](#firebase-studio)       | `.idx/dev.local.nix`                                                                                    | `.idx/dev.nix`, `.idx/icon.png`                                                      | Official docs show the gitignore entry verbatim; sunset announced |
-| [Gemini CLI](#gemini-cli)                 | —                                                                                                       | `GEMINI.md`, `.gemini/settings.json`, `.gemini/commands/`                            | Checkpoints live in `~/.gemini/`, not in the project              |
-| [GitHub Copilot](#github-copilot)         | —                                                                                                       | `.github/copilot-instructions.md`, `.github/instructions/`                           | CLI runtime data lives in `~/.copilot/`                           |
-| [Google Antigravity](#google-antigravity) | —                                                                                                       | `.agents/` (legacy `.agent/`)                                                        | `.agents/` is read by several harnesses; do not ignore it         |
-| [Goose](#goose)                           | `.goose/`                                                                                               | `.goosehints`, `AGENTS.md`                                                           | The Memory Extension auto-writes `.goose/memory/`                 |
-| [Hermes Agent](#hermes-agent)             | `AGENTS.override.md`                                                                                    | `.hermes.md`, `HERMES.md`                                                            | Officially "typically gitignored"                                 |
-| [iFlow CLI](#iflow-cli)                   | —                                                                                                       | `IFLOW.md`, `.iflowignore`                                                           | Discontinued 2026-04; `settings.json` may hold keys               |
-| [Jules](#jules)                           | —                                                                                                       | `AGENTS.md`                                                                          | Works in a cloud VM; delivers through pull requests               |
-| [Junie](#junie)                           | —                                                                                                       | `.junie/AGENTS.md`, `.junie/plans/`                                                  | Plans are officially "editable, committable"                      |
-| [Kilo Code](#kilo-code)                   | —                                                                                                       | `kilo.jsonc`, `.kilo/rules/`, `.kilocodeignore`                                      | `.kilo/tui.json` is a personal preference                         |
-| [Kimi Code CLI](#kimi-code-cli)           | `.kimi-code/local.toml`                                                                                 | `AGENTS.md`, `.kimi-code/mcp.json`                                                   | Officially recommends ignoring `local.toml`                       |
-| [Kiro](#kiro)                             | —                                                                                                       | `.kiro/steering/`, `.kiro/specs/`, `.kiro/hooks/`, `.kiroignore`                     | `.kiro/settings/mcp.json` must stay credential-free               |
-| [MiMo Code](#mimo-code)                   | `.mimocode/cache/`, `.mimocode/wiki/`, `.mimocode/wikis/`, `.mimo-worktrees/`                           | `.mimocode/` (config, skills, workflows)                                             | Entries mirror the official repository's own `.gitignore`         |
-| [OpenCode](#opencode)                     | `.opencode/plans/`, `.opencode/node_modules/`, `.opencode/package.json`, `.opencode/package-lock.json`  | `opencode.json`, `.opencode/` (agents, commands, plugins, ...)                       | Plugin dependencies are auto-installed into `.opencode/`          |
-| [OpenHands](#openhands)                   | —                                                                                                       | `.openhands/`, `.agents/skills/`, `AGENTS.md`                                        | Legacy `.openhands/microagents/` still supported                  |
-| [Pi](#pi)                                 | `AGENTS.override.md`                                                                                    | `.pi/` (settings, skills, prompts, ...)                                              | Sessions live in `~/.pi/agent/sessions/`                          |
-| [Qoder](#qoder)                           | `.qoder/settings.local.json`, `.qoder/worktrees/`                                                       | `.qoder/rules/`, `.qoder/settings.json`, `.qoder/repowiki/`                          | `rules/` is shareable by default                                  |
-| [Qwen Code](#qwen-code)                   | `.qwen/skills/auto-skill-*/`, `.qwen/skills/learned-skill-*/`, `.qwen/pending-skills/`, `.qwen-session` | `QWEN.md`, `.qwen/commands/`, `.qwen/agents/`, `.qwen/team-memory/`                  | The official repository ignores `.qwen/*` with a whitelist        |
-| [Replit](#replit)                         | `.local/`                                                                                               | `.replit`, `replit.nix`, `replit.md`                                                 | Local Agent skills live in `.local/secondary_skills/`             |
-| [Roo Code](#roo-code)                     | —                                                                                                       | `.roo/rules/`, `.roomodes`, `.rooignore`                                             | `.roo/rules/` is meant for version control                        |
-| [Serena](#serena)                         | `.serena/cache/`, `.serena/project.local.yml`                                                           | `.serena/project.yml`, `.serena/memories/`                                           | Serena writes its own `.serena/.gitignore` on activation          |
-| [Sourcegraph Cody](#sourcegraph-cody)     | —                                                                                                       | —                                                                                    | Server-side context; file lookup respects `.gitignore`            |
-| [Tabnine](#tabnine)                       | —                                                                                                       | `.tabnine/guidelines/`                                                               | Agent-style project guidelines                                    |
-| [Trae](#trae)                             | —                                                                                                       | `.trae/rules/`                                                                       | Memories live in the user home directory                          |
-| [Warp](#warp)                             | —                                                                                                       | `WARP.md`, `.warp/workflows/`                                                        | `.warp/rules/` does not exist officially                          |
-| [Windsurf](#windsurf)                     | `AGENTS.local.md`, `.devin/config.local.json`, `.devin/mcp_config.local.json`                           | `.devin/` (rules, skills, config), `.windsurf/` (legacy)                             | Renamed Devin Desktop in June 2026                                |
-| [ZCode](#zcode)                           | `.zcode/` (or just `.zcode/plans/`)                                                                     | `AGENTS.md`, `.zcodeignore`, `.zcode/skills/`                                        | Session plans are runtime artifacts                               |
-| [Zed](#zed)                               | —                                                                                                       | `.rules`, `.zed/`, `.agents/skills/`                                                 | Sessions live in Zed's user data directory                        |
+| Harness                                           | Recommended to ignore                                                                                   | Designed to be committed                                                             | Notes                                                             |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| [Aider](#aider)                                   | `.aider*`                                                                                               | `.aider.conf.yml`, `.aiderignore` (if shared)                                        | Aider writes `.aider*` into `.gitignore` by default               |
+| [Amazon Q Developer](#amazon-q-developer)         | —                                                                                                       | `.amazonq/rules/`, `.amazonq/cli-agents/`                                            | Agent JSONs with MCP credentials belong in env vars               |
+| [Amp](#amp)                                       | —                                                                                                       | `.amp/settings.json`, `.agents/setup`, `.agents/resume`                              | Threads live on Amp's servers                                     |
+| [Augment Code](#augment-code)                     | `.augment/settings.local.json`                                                                          | `.augment/settings.json`, `.augment/rules/`, `.augment-guidelines`, `.augmentignore` | `settings.local.json` is auto-added to `.gitignore`               |
+| [Baidu Comate](#baidu-comate)                     | —                                                                                                       | `.comate/rules/`                                                                     | Project rules are shared; personal rules are private              |
+| [Claude Code](#claude-code)                       | `CLAUDE.local.md`, `.claude/settings.local.json`, `.claude/agent-memory-local/`                         | `CLAUDE.md`, `.mcp.json`, everything else in `.claude/`                              | `settings.local.json` is auto-excluded via global excludes        |
+| [Cline](#cline)                                   | —                                                                                                       | `.clinerules/` or `.cline/`, `.clineignore`                                          | Runtime state lives in `~/.cline/`                                |
+| [CodeBuddy](#codebuddy)                           | `.codebuddy/settings.local.json`, `CODEBUDDY.local.md`                                                  | `CODEBUDDY.md`, everything else in `.codebuddy/`                                     | `settings.local.json` is auto-added to `.gitignore`               |
+| [Codebuff](#codebuff)                             | —                                                                                                       | `knowledge.md`, `.agents/`                                                           | Skips `.gitignore`d files by default                              |
+| [CodeGeeX](#codegeex)                             | —                                                                                                       | —                                                                                    | No project artifacts in official docs                             |
+| [CodeRabbit](#coderabbit)                         | —                                                                                                       | `.coderabbit.yaml`, `.coderabbit.config.ts`                                          | Review config travels with the repo; learnings live in the cloud  |
+| [Codex](#codex)                                   | —                                                                                                       | `AGENTS.md`, `.codex/skills/`, `.agents/skills/`                                     | `.codex/config.toml` depends on its content                       |
+| [Continue](#continue)                             | —                                                                                                       | `.continue/rules/`                                                                   | Index cache lives in `~/.continue/index`                          |
+| [Crush](#crush)                                   | `.crush/`                                                                                               | `.crushrc`, `.crushignore`, `crush.json` (deprecated)                                | Logs land in `.crush/logs/`; sessions in the user data directory  |
+| [Cursor](#cursor)                                 | —                                                                                                       | `.cursor/rules/`, `.cursorignore`                                                    | `.cursor/mcp.json` may hold secrets                               |
+| [DeepSeek Harness](#deepseek-harness)             | `AGENTS.local.md`, `CLAUDE.local.md`                                                                    | `AGENTS.md`, `CLAUDE.md`                                                             | Local overlays are "deliberately not committed"                   |
+| [Devin](#devin)                                   | —                                                                                                       | `.devin/wiki.json`, `AGENTS.md`                                                      | Cloud agent; CLI locals covered under Windsurf                    |
+| [Firebase Studio](#firebase-studio)               | `.idx/dev.local.nix`                                                                                    | `.idx/dev.nix`, `.idx/icon.png`                                                      | Official docs show the gitignore entry verbatim; sunset announced |
+| [Gemini CLI](#gemini-cli)                         | —                                                                                                       | `GEMINI.md`, `.gemini/settings.json`, `.gemini/commands/`                            | Checkpoints live in `~/.gemini/`, not in the project              |
+| [Gemini Code Assist](#gemini-code-assist)         | —                                                                                                       | `.gemini/config.yaml`, `.aiexclude`                                                  | IDE plugin and GitHub review bot; shares `.gemini/` with the CLI  |
+| [GitHub Copilot](#github-copilot)                 | —                                                                                                       | `.github/copilot-instructions.md`, `.github/instructions/`                           | CLI runtime data lives in `~/.copilot/`                           |
+| [Google Antigravity](#google-antigravity)         | —                                                                                                       | `.agents/` (legacy `.agent/`)                                                        | `.agents/` is read by several harnesses; do not ignore it         |
+| [Goose](#goose)                                   | `.goose/`                                                                                               | `.goosehints`, `AGENTS.md`                                                           | The Memory Extension auto-writes `.goose/memory/`                 |
+| [Hermes Agent](#hermes-agent)                     | `AGENTS.override.md`                                                                                    | `.hermes.md`, `HERMES.md`                                                            | Officially "typically gitignored"                                 |
+| [iFlow CLI](#iflow-cli)                           | —                                                                                                       | `IFLOW.md`, `.iflowignore`                                                           | Discontinued 2026-04; `settings.json` may hold keys               |
+| [JetBrains AI Assistant](#jetbrains-ai-assistant) | —                                                                                                       | `.aiassistant/rules/`, `.aiignore`                                                   | Honors `.cursorignore`, `.codeiumignore`, or `.aiexclude` instead |
+| [Jules](#jules)                                   | —                                                                                                       | `AGENTS.md`                                                                          | Works in a cloud VM; delivers through pull requests               |
+| [Junie](#junie)                                   | —                                                                                                       | `.junie/AGENTS.md`, `.junie/plans/`                                                  | Plans are officially "editable, committable"                      |
+| [Kilo Code](#kilo-code)                           | —                                                                                                       | `kilo.jsonc`, `.kilo/rules/`, `.kilocodeignore`                                      | `.kilo/tui.json` is a personal preference                         |
+| [Kimi Code CLI](#kimi-code-cli)                   | `.kimi-code/local.toml`                                                                                 | `AGENTS.md`, `.kimi-code/mcp.json`                                                   | Officially recommends ignoring `local.toml`                       |
+| [Kiro](#kiro)                                     | —                                                                                                       | `.kiro/steering/`, `.kiro/specs/`, `.kiro/hooks/`, `.kiroignore`                     | `.kiro/settings/mcp.json` must stay credential-free               |
+| [MiMo Code](#mimo-code)                           | `.mimocode/cache/`, `.mimocode/wiki/`, `.mimocode/wikis/`, `.mimo-worktrees/`                           | `.mimocode/` (config, skills, workflows)                                             | Entries mirror the official repository's own `.gitignore`         |
+| [OpenCode](#opencode)                             | `.opencode/plans/`, `.opencode/node_modules/`, `.opencode/package.json`, `.opencode/package-lock.json`  | `opencode.json`, `.opencode/` (agents, commands, plugins, ...)                       | Plugin dependencies are auto-installed into `.opencode/`          |
+| [OpenHands](#openhands)                           | —                                                                                                       | `.openhands/`, `.agents/skills/`, `AGENTS.md`                                        | Legacy `.openhands/microagents/` still supported                  |
+| [Pi](#pi)                                         | `AGENTS.override.md`                                                                                    | `.pi/` (settings, skills, prompts, ...)                                              | Sessions live in `~/.pi/agent/sessions/`                          |
+| [Qoder](#qoder)                                   | `.qoder/settings.local.json`, `.qoder/worktrees/`                                                       | `.qoder/rules/`, `.qoder/settings.json`, `.qoder/repowiki/`                          | `rules/` is shareable by default                                  |
+| [Qwen Code](#qwen-code)                           | `.qwen/skills/auto-skill-*/`, `.qwen/skills/learned-skill-*/`, `.qwen/pending-skills/`, `.qwen-session` | `QWEN.md`, `.qwen/commands/`, `.qwen/agents/`, `.qwen/team-memory/`                  | The official repository ignores `.qwen/*` with a whitelist        |
+| [Replit](#replit)                                 | `.local/`                                                                                               | `.replit`, `replit.nix`, `replit.md`                                                 | Local Agent skills live in `.local/secondary_skills/`             |
+| [Roo Code](#roo-code)                             | —                                                                                                       | `.roo/rules/`, `.roomodes`, `.rooignore`                                             | `.roo/rules/` is meant for version control                        |
+| [Serena](#serena)                                 | `.serena/cache/`, `.serena/project.local.yml`                                                           | `.serena/project.yml`, `.serena/memories/`                                           | Serena writes its own `.serena/.gitignore` on activation          |
+| [Sourcegraph Cody](#sourcegraph-cody)             | —                                                                                                       | —                                                                                    | Server-side context; file lookup respects `.gitignore`            |
+| [Tabnine](#tabnine)                               | —                                                                                                       | `.tabnine/guidelines/`                                                               | Agent-style project guidelines                                    |
+| [Trae](#trae)                                     | —                                                                                                       | `.trae/rules/`                                                                       | Memories live in the user home directory                          |
+| [Warp](#warp)                                     | —                                                                                                       | `WARP.md`, `.warp/workflows/`                                                        | `.warp/rules/` does not exist officially                          |
+| [Windsurf](#windsurf)                             | `AGENTS.local.md`, `.devin/config.local.json`, `.devin/mcp_config.local.json`                           | `.devin/` (rules, skills, config), `.windsurf/` (legacy)                             | Renamed Devin Desktop in June 2026                                |
+| [ZCode](#zcode)                                   | `.zcode/` (or just `.zcode/plans/`)                                                                     | `AGENTS.md`, `.zcodeignore`, `.zcode/skills/`                                        | Session plans are runtime artifacts                               |
+| [Zed](#zed)                                       | —                                                                                                       | `.rules`, `.zed/`, `.agents/skills/`                                                 | Sessions live in Zed's user data directory                        |
 
 ## Harnesses
 
@@ -227,6 +230,23 @@ Notes:
 
 - Community posts mention a `.codegeex/` directory, but no official documentation confirms it; this repository does not collect unverified paths
 
+### [CodeRabbit](https://www.coderabbit.ai)
+
+> Documentation: <https://docs.coderabbit.ai/getting-started/yaml-configuration>
+
+Recommended to ignore:
+
+- Nothing — learned preferences ("Learnings") live in CodeRabbit's cloud database, not in the project
+
+Keep in version control:
+
+- `.coderabbit.yaml` (or `.yml`) — repository review configuration, read from the branch under review
+- `.coderabbit.config.ts` — TypeScript alternative; a committed YAML file always takes precedence
+
+Notes:
+
+- `.coderabbitignore` appears in community posts but is not an official feature; file filtering goes through `path_filters` in the YAML configuration
+
 ### [Codex](https://github.com/openai/codex)
 
 > Documentation: <https://developers.openai.com/codex/guides/agents-md>
@@ -353,6 +373,27 @@ Case by case:
 
 - `.gemini/settings.json` — workspace settings override user settings; review for personal values before committing
 
+### [Gemini Code Assist](https://docs.cloud.google.com/gemini/docs)
+
+> Documentation: <https://docs.cloud.google.com/gemini/docs/code-review/customize-repo-review>
+
+Recommended to ignore:
+
+- Nothing documented
+
+Keep in version control:
+
+- `.gemini/config.yaml`, `.gemini/styleguide.md` — repository configuration for the GitHub review bot, read from the repository
+- `.aiexclude` — keeps files out of Gemini's context, using `.gitignore` syntax
+
+Case by case:
+
+- `.aiexclude` — ignore it only when it holds personal paths
+
+Notes:
+
+- The IDE plugin and the GitHub review bot share the `.gemini/` directory with [Gemini CLI](#gemini-cli); `.gemini/settings.json` and `.geminiignore` belong to Gemini CLI
+
 ### [GitHub Copilot](https://github.com/features/copilot)
 
 > Documentation: <https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot>
@@ -424,6 +465,19 @@ Keep in version control:
 Case by case:
 
 - `.iflow/settings.json` — project settings may hold `apiKey` and `baseUrl`; keep credential-bearing files local (no official gitignore guidance exists)
+
+### [JetBrains AI Assistant](https://www.jetbrains.com/ai-assistant/)
+
+> Documentation: <https://www.jetbrains.com/help/ai-assistant/configure-project-rules.html>
+
+Recommended to ignore:
+
+- Nothing documented
+
+Keep in version control:
+
+- `.aiassistant/rules/*.md` — project rules (always, manual `@rule:`, model decision, or file patterns)
+- `.aiignore` — same syntax as `.gitignore`; JetBrains also honors `.cursorignore`, `.codeiumignore`, or `.aiexclude` when present
 
 ### [Jules](https://jules.google)
 
