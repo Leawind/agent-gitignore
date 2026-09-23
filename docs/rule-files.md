@@ -7,28 +7,28 @@
 
 ## Overview
 
-| Tool              | Project Rule Files                                                       | Notes                                                                                  |
-| ----------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| Aider             | `CONVENTIONS.md`                                                         | Loaded as read-only files via `--read` or `read:` in `.aider.conf.yml`                 |
-| Claude Code       | `CLAUDE.md`, `.claude/rules/*.md`                                        | Supports `@import` syntax to include other files                                       |
-| Cline             | `.clinerules/*.md`                                                       | Also compatible with `.cursorrules`, `.windsurfrules`, `AGENTS.md`                     |
-| CodeBuddy         | `CODEBUDDY.md`, `.codebuddy/rules/*/RULE.mdc`                            | Rule types: Always, Agent Requested, Manual                                            |
-| Codex             | `AGENTS.md`                                                              | Supports `@import` syntax to include other files                                       |
-| Cursor            | `.cursor/rules/*.mdc`, `AGENTS.md`                                       | `.mdc` files support frontmatter to control triggering                                 |
-| DeepSeek Harness  | `AGENTS.md`, `CLAUDE.md`                                                 | Supports `.local.md` overlays and hierarchical loading; global file in `~/.dsh/`       |
-| Gemini CLI        | `GEMINI.md`                                                              | Supports `@file.md` syntax to import subfiles                                          |
-| GitHub Copilot    | `.github/copilot-instructions.md`, `AGENTS.md`                           | Path-specific rules placed in `.github/instructions/*.instructions.md`                 |
-| Google Antigravity| `.agents/rules/*.md`                                                     | Activation modes: Manual, Always On, Model Decision, Glob; global `~/.gemini/GEMINI.md`|
-| Hermes Agent      | `.hermes.md`, `HERMES.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`      | Supports progressive subdirectory discovery; `SOUL.md` for global personality          |
-| Kilo Code         | `.kilo/rules/*.md` (recommended)                                         | Configure instruction paths via `kilo.jsonc`; compatible with legacy `.kilocode/`      |
-| MiMo Code         | `AGENTS.md`, `CLAUDE.md`                                                 | Customizable instruction file paths in `mimocode.json`                                 |
-| OpenCode          | `AGENTS.md`                                                              | Customizable instruction file paths in `opencode.json`                                 |
-| Pi                | `AGENTS.md`                                                              | Loads `AGENTS.md` files hierarchically (global to project) into the system prompt      |
-| Qwen Code         | `QWEN.md`                                                                | Three tiers: global `~/.qwen/QWEN.md`, project root, subdirectories                    |
-| Replit            | `replit.md`                                                              | Auto-managed by Replit Agent; condensed automatically when it grows long               |
-| Trae              | `.trae/rules/*.md`                                                       | Supports frontmatter to control trigger scenarios (e.g., `scene: git_message`)         |
-| Windsurf          | `.devin/rules/*.md`, `.windsurf/rules/*.md`                              | frontmatter `trigger`: `always_on`, `model_decision`, `glob`, `manual`                 |
-| Zed               | `.rules`, `AGENTS.md`                                                    | Auto-loads `.cursorrules`, `.windsurfrules`, etc.; first match wins                    |
+| Tool               | Project Rule Files                                                  | Notes                                                                                   |
+| ------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Aider              | `CONVENTIONS.md`                                                    | Loaded as read-only files via `--read` or `read:` in `.aider.conf.yml`                  |
+| Claude Code        | `CLAUDE.md`, `.claude/rules/*.md`                                   | Supports `@import` syntax to include other files                                        |
+| Cline              | `.clinerules/*.md`                                                  | Also compatible with `.cursorrules`, `.windsurfrules`, `AGENTS.md`                      |
+| CodeBuddy          | `CODEBUDDY.md`, `.codebuddy/rules/*/RULE.mdc`                       | Rule types: Always, Agent Requested, Manual                                             |
+| Codex              | `AGENTS.md`                                                         | Supports `@import` syntax to include other files                                        |
+| Cursor             | `.cursor/rules/*.mdc`, `AGENTS.md`                                  | `.mdc` files support frontmatter to control triggering                                  |
+| DeepSeek Harness   | `AGENTS.md`, `CLAUDE.md`                                            | Supports `.local.md` overlays and hierarchical loading; global file in `~/.dsh/`        |
+| Gemini CLI         | `GEMINI.md`                                                         | Supports `@file.md` syntax to import subfiles                                           |
+| GitHub Copilot     | `.github/copilot-instructions.md`, `AGENTS.md`                      | Path-specific rules placed in `.github/instructions/*.instructions.md`                  |
+| Google Antigravity | `.agents/rules/*.md`                                                | Activation modes: Manual, Always On, Model Decision, Glob; global `~/.gemini/GEMINI.md` |
+| Hermes Agent       | `.hermes.md`, `HERMES.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules` | Supports progressive subdirectory discovery; `SOUL.md` for global personality           |
+| Kilo Code          | `.kilo/rules/*.md` (recommended)                                    | Configure instruction paths via `kilo.jsonc`; compatible with legacy `.kilocode/`       |
+| MiMo Code          | `AGENTS.md`, `CLAUDE.md`                                            | Customizable instruction file paths in `mimocode.json`                                  |
+| OpenCode           | `AGENTS.md`                                                         | Customizable instruction file paths in `opencode.json`                                  |
+| Pi                 | `AGENTS.md`                                                         | Loads `AGENTS.md` files hierarchically (global to project) into the system prompt       |
+| Qwen Code          | `QWEN.md`                                                           | Three tiers: global `~/.qwen/QWEN.md`, project root, subdirectories                     |
+| Replit             | `replit.md`                                                         | Auto-managed by Replit Agent; condensed automatically when it grows long                |
+| Trae               | `.trae/rules/*.md`                                                  | Supports frontmatter to control trigger scenarios (e.g., `scene: git_message`)          |
+| Windsurf           | `.devin/rules/*.md`, `.windsurf/rules/*.md`                         | frontmatter `trigger`: `always_on`, `model_decision`, `glob`, `manual`                  |
+| Zed                | `.rules`, `AGENTS.md`                                               | Auto-loads `.cursorrules`, `.windsurfrules`, etc.; first match wins                     |
 
 ## Tools
 
@@ -181,12 +181,12 @@ Project Rule Files:
 
 Activation Modes:
 
-| Mode              | Description                                        |
-| ----------------- | -------------------------------------------------- |
-| Manual            | Active only when manually invoked                  |
-| Always On         | Included in every interaction                      |
-| Model Decision    | Agent reads the full rule when it deems relevant   |
-| Glob              | Active when files matching a glob pattern are touched |
+| Mode           | Description                                           |
+| -------------- | ----------------------------------------------------- |
+| Manual         | Active only when manually invoked                     |
+| Always On      | Included in every interaction                         |
+| Model Decision | Agent reads the full rule when it deems relevant      |
+| Glob           | Active when files matching a glob pattern are touched |
 
 ### [Hermes Agent](https://hermes-agent.nousresearch.com)
 
@@ -328,12 +328,12 @@ Project Rule Files:
 
 Rule Types (controlled via frontmatter `trigger`):
 
-| Type            | Description                                              |
-| --------------- | -------------------------------------------------------- |
-| `always_on`     | Full content included in the system prompt on every message |
-| `model_decision`| Only the description is shown; the model reads the file when relevant |
-| `glob`          | Active when files matching the `globs` pattern are touched |
-| `manual`        | Active only when mentioned with `@rule-name` in chat     |
+| Type             | Description                                                           |
+| ---------------- | --------------------------------------------------------------------- |
+| `always_on`      | Full content included in the system prompt on every message           |
+| `model_decision` | Only the description is shown; the model reads the file when relevant |
+| `glob`           | Active when files matching the `globs` pattern are touched            |
+| `manual`         | Active only when mentioned with `@rule-name` in chat                  |
 
 > Note: Windsurf was renamed Devin Desktop in June 2026; existing `.windsurf/` paths continue to be supported.
 

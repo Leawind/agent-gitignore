@@ -7,28 +7,28 @@
 
 ## 总览
 
-| 工具               | 项目规则文件                                                            | 备注                                                            |
-| ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Aider              | `CONVENTIONS.md`                                                        | 通过 `--read` 或 `.aider.conf.yml` 的 `read:` 以只读方式加载    |
-| Claude Code        | `CLAUDE.md`、`.claude/rules/*.md`                                       | 支持 `@import` 语法导入其他文件                                 |
-| Cline              | `.clinerules/*.md`                                                      | 同时兼容 `.cursorrules`、`.windsurfrules`、`AGENTS.md`          |
-| CodeBuddy          | `CODEBUDDY.md`、`.codebuddy/rules/*/RULE.mdc`                           | 规则类型分为 Always、Agent Requested、Manual                    |
-| Codex              | `AGENTS.md`                                                             | 支持 `@import` 语法导入其他文件                                 |
-| Cursor             | `.cursor/rules/*.mdc`、`AGENTS.md`                                      | `.mdc` 文件支持 frontmatter 控制触发方式                        |
-| DeepSeek Harness   | `AGENTS.md`、`CLAUDE.md`                                                | 支持 `.local.md` 本地覆盖与层级加载；全局文件位于 `~/.dsh/`     |
-| Gemini CLI         | `GEMINI.md`                                                             | 支持 `@file.md` 语法导入子文件                                  |
-| GitHub Copilot     | `.github/copilot-instructions.md`、`AGENTS.md`                          | 路径特定规则放在 `.github/instructions/*.instructions.md`       |
-| Google Antigravity | `.agents/rules/*.md`                                                    | 激活模式：Manual、Always On、Model Decision、Glob；支持 `@filename` 引用 |
-| Hermes Agent       | `.hermes.md`、`HERMES.md`、`AGENTS.md`、`CLAUDE.md`、`.cursorrules`     | 支持渐进式子目录发现；`SOUL.md` 用于全局个性定制                |
-| Kilo Code          | `.kilo/rules/*.md` (推荐)                                               | 通过 `kilo.jsonc` 配置指令路径，兼容旧版 `.kilocode/`           |
-| MiMo Code          | `AGENTS.md`、`CLAUDE.md`                                                | 可在 `mimocode.json` 中自定义指令文件路径                       |
-| OpenCode           | `AGENTS.md`                                                             | 可在 `opencode.json` 中自定义指令文件路径                       |
-| Pi                 | `AGENTS.md`                                                             | 按全局到项目的层级加载 `AGENTS.md` 并注入系统提示               |
-| Qwen Code          | `QWEN.md`                                                               | 三层级：全局 `~/.qwen/QWEN.md`、项目根、子目录                  |
-| Replit             | `replit.md`                                                             | 由 Replit Agent 自动维护，内容过长时自动压缩                    |
-| Trae               | `.trae/rules/*.md`                                                      | 支持 frontmatter 控制触发场景（如 `scene: git_message`）        |
-| Windsurf           | `.devin/rules/*.md`、`.windsurf/rules/*.md`                             | frontmatter `trigger`：`always_on`、`model_decision`、`glob`、`manual` |
-| Zed                | `.rules`、`AGENTS.md`                                                   | 自动识别 `.cursorrules`、`.windsurfrules` 等，首个匹配生效      |
+| 工具               | 项目规则文件                                                        | 备注                                                                     |
+| ------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Aider              | `CONVENTIONS.md`                                                    | 通过 `--read` 或 `.aider.conf.yml` 的 `read:` 以只读方式加载             |
+| Claude Code        | `CLAUDE.md`、`.claude/rules/*.md`                                   | 支持 `@import` 语法导入其他文件                                          |
+| Cline              | `.clinerules/*.md`                                                  | 同时兼容 `.cursorrules`、`.windsurfrules`、`AGENTS.md`                   |
+| CodeBuddy          | `CODEBUDDY.md`、`.codebuddy/rules/*/RULE.mdc`                       | 规则类型分为 Always、Agent Requested、Manual                             |
+| Codex              | `AGENTS.md`                                                         | 支持 `@import` 语法导入其他文件                                          |
+| Cursor             | `.cursor/rules/*.mdc`、`AGENTS.md`                                  | `.mdc` 文件支持 frontmatter 控制触发方式                                 |
+| DeepSeek Harness   | `AGENTS.md`、`CLAUDE.md`                                            | 支持 `.local.md` 本地覆盖与层级加载；全局文件位于 `~/.dsh/`              |
+| Gemini CLI         | `GEMINI.md`                                                         | 支持 `@file.md` 语法导入子文件                                           |
+| GitHub Copilot     | `.github/copilot-instructions.md`、`AGENTS.md`                      | 路径特定规则放在 `.github/instructions/*.instructions.md`                |
+| Google Antigravity | `.agents/rules/*.md`                                                | 激活模式：Manual、Always On、Model Decision、Glob；支持 `@filename` 引用 |
+| Hermes Agent       | `.hermes.md`、`HERMES.md`、`AGENTS.md`、`CLAUDE.md`、`.cursorrules` | 支持渐进式子目录发现；`SOUL.md` 用于全局个性定制                         |
+| Kilo Code          | `.kilo/rules/*.md` (推荐)                                           | 通过 `kilo.jsonc` 配置指令路径，兼容旧版 `.kilocode/`                    |
+| MiMo Code          | `AGENTS.md`、`CLAUDE.md`                                            | 可在 `mimocode.json` 中自定义指令文件路径                                |
+| OpenCode           | `AGENTS.md`                                                         | 可在 `opencode.json` 中自定义指令文件路径                                |
+| Pi                 | `AGENTS.md`                                                         | 按全局到项目的层级加载 `AGENTS.md` 并注入系统提示                        |
+| Qwen Code          | `QWEN.md`                                                           | 三层级：全局 `~/.qwen/QWEN.md`、项目根、子目录                           |
+| Replit             | `replit.md`                                                         | 由 Replit Agent 自动维护，内容过长时自动压缩                             |
+| Trae               | `.trae/rules/*.md`                                                  | 支持 frontmatter 控制触发场景（如 `scene: git_message`）                 |
+| Windsurf           | `.devin/rules/*.md`、`.windsurf/rules/*.md`                         | frontmatter `trigger`：`always_on`、`model_decision`、`glob`、`manual`   |
+| Zed                | `.rules`、`AGENTS.md`                                               | 自动识别 `.cursorrules`、`.windsurfrules` 等，首个匹配生效               |
 
 ## 工具
 
@@ -184,12 +184,12 @@
 
 激活模式:
 
-| 模式              | 说明                                  |
-| ----------------- | ------------------------------------- |
-| Manual            | 仅在手动指定时生效                    |
-| Always On         | 每次交互都生效                        |
-| Model Decision    | 智能体判断相关时自行读取完整规则      |
-| Glob              | 触碰匹配 glob 模式的文件时生效        |
+| 模式           | 说明                             |
+| -------------- | -------------------------------- |
+| Manual         | 仅在手动指定时生效               |
+| Always On      | 每次交互都生效                   |
+| Model Decision | 智能体判断相关时自行读取完整规则 |
+| Glob           | 触碰匹配 glob 模式的文件时生效   |
 
 ### [Hermes Agent](https://hermes-agent.nousresearch.com)
 
@@ -332,12 +332,12 @@
 
 规则类型 (通过 frontmatter 的 `trigger` 控制):
 
-| 类型             | 说明                                      |
-| ---------------- | ----------------------------------------- |
-| `always_on`      | 完整内容随系统提示在每条消息中生效        |
-| `model_decision` | 仅显示描述，模型判断相关时读取完整文件    |
-| `glob`           | 触碰匹配 `globs` 模式的文件时生效         |
-| `manual`         | 仅在聊天中通过 `@rule-name` 提及时生效    |
+| 类型             | 说明                                   |
+| ---------------- | -------------------------------------- |
+| `always_on`      | 完整内容随系统提示在每条消息中生效     |
+| `model_decision` | 仅显示描述，模型判断相关时读取完整文件 |
+| `glob`           | 触碰匹配 `globs` 模式的文件时生效      |
+| `manual`         | 仅在聊天中通过 `@rule-name` 提及时生效 |
 
 > 注意：Windsurf 已于 2026 年 6 月更名为 Devin Desktop；现有 `.windsurf/` 路径继续受支持。
 
