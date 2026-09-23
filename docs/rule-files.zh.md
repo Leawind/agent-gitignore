@@ -1,3 +1,5 @@
+> **归档说明 / Archived**: 本仓库已改作他用（agent-gitignore）。本文档为旧用途「Vibe Coding Tools 规则文件大全」的存档版本，不再维护；当前内容见根目录 README.md / README.zh.md。历史版本可参考 tag `vibe-rule-files-final`。
+
 | 中文 | [English](README.md) |
 | ---- | -------------------- |
 
