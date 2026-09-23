@@ -44,7 +44,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Continue](#continue)                     | —                                                                                                       | `.continue/rules/`                                                                   | 索引缓存位于 `~/.continue/index`                |
 | [Crush](#crush)                           | `.crush/`                                                                                               | `.crushrc`、`.crushignore`、`crush.json`（已弃用）                                   | 日志落在 `.crush/logs/`，会话在用户数据目录     |
 | [Cursor](#cursor)                         | —                                                                                                       | `.cursor/rules/`、`.cursorignore`                                                    | `.cursor/mcp.json` 可能含密钥                   |
-| [DeepSeek Harness](#deepseek-harness)     | `AGENTS.local.md`、`CLAUDE.local.md`                                                                    | `AGENTS.md`、`CLAUDE.md`                                                             | 本地覆盖文件"刻意不提交"                        |
+| [DeepSeek Harness](#deepseek-harness)     | `AGENTS.local.md`、`CLAUDE.local.md`                                                                    | `AGENTS.md`、`CLAUDE.md`                                                             | 本地覆盖文件“刻意不提交”                        |
 | [Devin](#devin)                           | —                                                                                                       | `.devin/wiki.json`、`AGENTS.md`                                                      | 云端代理；CLI 本地条目见 Windsurf 章节          |
 | [Firebase Studio](#firebase-studio)       | `.idx/dev.local.nix`                                                                                    | `.idx/dev.nix`、`.idx/icon.png`                                                      | 官方文档直接给出 gitignore 示例；已宣布 sunset  |
 | [Gemini CLI](#gemini-cli)                 | —                                                                                                       | `GEMINI.md`、`.gemini/settings.json`、`.gemini/commands/`                            | 检查点保存在 `~/.gemini/`，不进项目             |
@@ -118,7 +118,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `.amp/settings.json`（或 `.jsonc`）— 工作区设置，从当前目录向上搜索到仓库根
-- `.agents/setup`、`.agents/resume` — Orb 初始化脚本；官方在 2026 年 8 月专门推出"无需提交即可完成 setup"的功能，印证它们默认是被提交的
+- `.agents/setup`、`.agents/resume` — Orb 初始化脚本；官方在 2026 年 8 月专门推出“无需提交即可完成 setup”的功能，印证它们默认是被提交的
 
 ### [Augment Code](https://www.augmentcode.com)
 
@@ -143,11 +143,11 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议提交:
 
-- `.comate/rules/*.mdr` — 项目规则，官方原文"随项目/代码库共享，团队成员均可使用"
+- `.comate/rules/*.mdr` — 项目规则，官方原文“随项目/代码库共享，团队成员均可使用”
 
 视情况:
 
-- 个人 Rules — 官方区分"个人 Rules"（个人偏好）与项目规则，但未说明个人规则的项目内路径；私有内容请勿放入共享目录
+- 个人 Rules — 官方区分“个人 Rules”（个人偏好）与项目规则，但未说明个人规则的项目内路径；私有内容请勿放入共享目录
 
 ### [Claude Code](https://claude.ai/code)
 
@@ -384,7 +384,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- `.goose/` — Memory 扩展把项目记忆自动写入 `.goose/memory/`，会话保存在 `~/.local/share/goose/sessions/`；官方无 `.gitignore` 建议，此条基于官方"自动存储"的描述
+- `.goose/` — Memory 扩展把项目记忆自动写入 `.goose/memory/`，会话保存在 `~/.local/share/goose/sessions/`；官方无 `.gitignore` 建议，此条基于官方“自动存储”的描述
 
 建议提交:
 
