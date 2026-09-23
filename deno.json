@@ -20,7 +20,7 @@
     "trailingCommas": "onlyMultiLine",
     "typeLiteral.separatorKind": "semiColon",
     "include": [
-      "*.md"
+      "**/*.md"
     ],
     "exclude": []
   }

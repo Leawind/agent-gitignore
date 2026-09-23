@@ -24,6 +24,8 @@ Two flavors are available:
 - [examples/agent.gitignore](examples/agent.gitignore) — the full version. Follows official defaults where they exist (for example, Aider ignores `.aider*` by itself) and marks case-by-case entries as comments.
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — a minimal subset: only unambiguous runtime state, caches, and personal files. Nothing here hides a shareable config.
 
+On gitignore semantics: patterns without a slash match at any directory level, while a `**/` prefix covers every level of nested directories — so `**/.claude/settings.local.json` also protects nested worktrees.
+
 ## Overview
 
 | Harness            | Recommended to ignore                                                                                   | Designed to be committed                                            | Notes                                                      |
@@ -384,6 +386,10 @@ These look like harness clutter but are designed to be committed:
 - Ignore-policy files themselves: `.zcodeignore`, `.aiderignore`, `.cursorignore`, `.geminiignore`, `.clineignore`, `.kilocodeignore`
 
 The recurring naming convention for personal files is the `.local.` / `.override.` suffix (`AGENTS.local.md`, `CLAUDE.local.md`, `AGENTS.override.md`) and `settings.local.json`. Those are the entries this repository collects. Runtime state such as sessions, caches, and plans mostly lives in the user home directory, so a well-behaved harness leaves little more than shareable configuration in your project.
+
+## Not Yet Covered
+
+These harnesses also write into workspaces, but verified entries are not collected yet: Augment Code, Amp, Crush, Devin (cloud), Goose, Jules, Junie, Kiro, Serena. Contributions are welcome — see [AGENTS.md](AGENTS.md).
 
 ## Contributing
 

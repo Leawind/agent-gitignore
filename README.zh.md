@@ -24,6 +24,8 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 - [examples/agent.gitignore](examples/agent.gitignore) — 完整版。凡有官方默认值之处遵循官方默认（例如 Aider 会自行忽略 `.aider*`），需要酌情判断的条目以注释形式标注。
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — 保守版，只含无歧义的运行时状态、缓存和个人文件，不会误伤任何可共享配置。
 
+关于 gitignore 语法：不带斜杠的模式在任意目录层级生效；`**/` 前缀可覆盖嵌套目录的每一层，因此 `**/.claude/settings.local.json` 对嵌套工作区同样有效。
+
 ## 总览
 
 | 工具               | 建议忽略                                                                                                | 建议提交                                                            | 备注                                            |
@@ -384,6 +386,10 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 - 忽略策略文件本身：`.zcodeignore`、`.aiderignore`、`.cursorignore`、`.geminiignore`、`.clineignore`、`.kilocodeignore`
 
 个人文件的通用命名约定是 `.local.` / `.override.` 后缀（`AGENTS.local.md`、`CLAUDE.local.md`、`AGENTS.override.md`）以及 `settings.local.json`——这正是本仓库收集的条目。会话、缓存、计划等运行时状态大多保存在用户主目录，因此表现良好的框架在项目里留下的往往只有可共享的配置。
+
+## 尚未覆盖
+
+以下框架同样会向工作区写入文件，但尚未收集到经核实的条目：Augment Code、Amp、Crush、Devin（云端版）、Goose、Jules、Junie、Kiro、Serena。欢迎贡献，见 [AGENTS.md](AGENTS.md)。
 
 ## 参与贡献
 
