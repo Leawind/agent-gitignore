@@ -122,7 +122,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `.amp/settings.json`（或 `.jsonc`）— 工作区设置，从当前目录向上搜索到仓库根
-- `.agents/setup`、`.agents/resume` — Orb 初始化脚本；官方在 2026 年 8 月专门推出“无需提交即可完成 setup”的功能，印证它们默认是被提交的
+- `.agents/setup`、`.agents/resume` — Orb 初始化脚本；官方原文 "Both files are optional. Commit them to the repository."（2026 年 8 月另推出了免提交的 setup 流程）
 
 ### [Augment Code](https://www.augmentcode.com)
 
@@ -448,7 +448,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `.junie/AGENTS.md` — 团队编码规范；旧版 `.junie/guidelines.md` 仍受支持
-- `.junie/plans/` — 官方明言 "editable, committable" 的可长期维护的任务文档
+- `.junie/plans/` — 产品主页原文 "editable, committable"；JetBrains 官方博客称之为 "living task documentation"
 
 ### [Kilo Code](https://kilo.ai)
 
@@ -523,7 +523,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- `.opencode/plans/` — plan 模式写入的计划文件
+- `.opencode/plans/` — plan 模式写入的计划文件（位于 Git 仓库内时；否则写入全局数据目录）
 - `.opencode/node_modules/`、`.opencode/package.json`、`.opencode/package-lock.json` — `.opencode/` 目录存在后 OpenCode 自动安装的插件依赖（OpenCode 会为它们写入自己的 `.opencode/.gitignore`）
 
 建议提交:

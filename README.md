@@ -122,7 +122,7 @@ Recommended to ignore:
 Keep in version control:
 
 - `.amp/settings.json` (or `.jsonc`) — workspace settings, searched upward to the repository root
-- `.agents/setup`, `.agents/resume` — Orb setup scripts; an official 2026-08 feature exists specifically to run setups without committing them, which confirms they are normally committed
+- `.agents/setup`, `.agents/resume` — Orb setup scripts; "Both files are optional. Commit them to the repository." A 2026-08 feature additionally allows setting up orbs without committing these files
 
 ### [Augment Code](https://www.augmentcode.com)
 
@@ -448,7 +448,7 @@ Recommended to ignore:
 Keep in version control:
 
 - `.junie/AGENTS.md` — team coding conventions; the legacy `.junie/guidelines.md` is still supported
-- `.junie/plans/` — officially "editable, committable" living task documentation
+- `.junie/plans/` — "editable, committable" per the product homepage; the JetBrains blog calls it "living task documentation"
 
 ### [Kilo Code](https://kilo.ai)
 
@@ -523,7 +523,7 @@ Notes:
 
 Recommended to ignore:
 
-- `.opencode/plans/` — plan files written by plan mode
+- `.opencode/plans/` — plan files written by plan mode (inside a Git repository; otherwise they land in the global data directory)
 - `.opencode/node_modules/`, `.opencode/package.json`, `.opencode/package-lock.json` — plugin dependencies that OpenCode auto-installs once `.opencode/` exists (OpenCode writes its own `.opencode/.gitignore` for these)
 
 Keep in version control:
