@@ -3,9 +3,9 @@
 
 # agent-gitignore
 
-AI 编码框架（harness，即 CLI 智能体、IDE 助手与评审智能体）——Claude Code、Cursor、CodeRabbit、Qwen Code 等——会在工作区里留下各种杂物：对话历史、计划文件、缓存、自动生成的技能、个人设置，它们大多不应进入版本控制。与此同时，一些看起来像杂物的文件——`AGENTS.md`、`.agents/`、`.zcodeignore`——恰恰是设计为提交共享的。
+AI 编码框架（英文圈常称 harness，指 CLI 智能体、IDE 助手与评审智能体一类工具）——Claude Code、Cursor、CodeRabbit、Qwen Code 等——会在工作区里留下各种杂物：对话历史、计划文件、缓存、自动生成的技能、个人设置，它们大多不应进入版本控制。与此同时，一些看起来像杂物的文件——`AGENTS.md`、`.agents/`、`.zcodeignore`——恰恰是设计为提交共享的。
 
-本仓库收集 40+ 个 AI 编码框架的工作区产物，每一条目均经官方文档核实，并提供可直接使用的示例 `.gitignore` 文件。条目最后核对官方文档的时间为 2026 年 9 月。
+本仓库收集 47 个 AI 编码框架的工作区产物，每一条目均经官方文档核实，并提供可直接使用的示例 `.gitignore` 文件。条目最后核对官方文档的时间为 2026 年 9 月。
 
 ## 快速开始
 
@@ -19,16 +19,16 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/examples/agent.gitignore >> .gitignore
 ```
 
-追加合并非幂等 — 请只执行一次，或仅粘贴你需要的部分。若已有的 `.gitignore` 排除了某个父目录，其内部条目将不会生效。
+追加合并的操作不是幂等的——请只执行一次，或仅粘贴你需要的部分。若已有的 `.gitignore` 排除了某个父目录，其内部条目将不会生效。
 
 提供两种版本：
 
-- [examples/agent.gitignore](examples/agent.gitignore) — 完整版。凡有官方默认值之处遵循官方默认（例如 Aider 会自行忽略 `.aider*`），需要酌情判断的条目以注释形式标注。
+- [examples/agent.gitignore](examples/agent.gitignore) — 完整版。凡有官方默认值之处遵循官方默认（例如 Aider 会自行忽略 `.aider*`），需要视情况处理的条目以注释形式标注。
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — 保守版，只含无歧义的运行时状态、缓存和个人文件，不会误伤任何可共享配置。
 
 关于 gitignore 语法：不带斜杠的模式在任意目录层级生效；`**/` 前缀可覆盖嵌套目录的每一层，因此 `**/.claude/settings.local.json` 对嵌套工作树同样有效。
 
-下文每个条目都有三种判定之一：**建议忽略** — 应留在本地的运行时状态、缓存与个人覆盖文件；**建议提交** — 为版本控制而设计的规则、技能与共享配置；**视情况** — 可能含密钥或个人偏好，提交前请先阅读条目。当框架不在项目内留下任何东西时，章节会写 **无**（已核实：运行时状态保存在项目之外）或 **无官方记载**（官方文档未描述任何项目内产物）。
+下文每个条目都有三种判定之一：**建议忽略** — 应留在本地的运行时状态、缓存与个人覆盖文件；**建议提交** — 为版本控制而设计的规则、技能与共享配置；**视情况** — 可能含密钥或个人偏好，提交前请先阅读条目。当框架不在项目内留下任何东西时，章节会写 **无**（已核实：运行时状态保存在项目之外）或 **无官方记载**（官方文档未描述任何项目内产物），个别章节会加限定语（如“默认无”）。
 
 ## 总览
 
@@ -38,7 +38,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Amazon Q Developer](#amazon-q-developer)         | —                                                                                                       | `.amazonq/rules/`、`.amazonq/cli-agents/`                                            | 含 MCP 凭据的 agent JSON 走环境变量                       |
 | [Amp](#amp)                                       | —                                                                                                       | `.amp/settings.json`、`.agents/setup`、`.agents/resume`                              | 线程保存在 Amp 服务端                                     |
 | [Augment Code](#augment-code)                     | `.augment/settings.local.json`                                                                          | `.augment/settings.json`、`.augment/rules/`、`.augment-guidelines`、`.augmentignore` | `settings.local.json` 官方自动加入 `.gitignore`           |
-| [Baidu Comate](#baidu-comate)                     | —                                                                                                       | `.comate/rules/`                                                                     | 项目规则随库共享，个人规则私有                            |
+| [Baidu Comate](#baidu-comate)                     | —                                                                                                       | `.comate/rules/`                                                                     | 项目规则随仓库共享，个人规则私有                          |
 | [Claude Code](#claude-code)                       | `CLAUDE.local.md`、`.claude/settings.local.json`、`.claude/agent-memory-local/`                         | `CLAUDE.md`、`.mcp.json`、`.claude/` 其余内容                                        | `settings.local.json` 自动进全局 git 排除                 |
 | [Cline](#cline)                                   | —                                                                                                       | `.clinerules/` 或 `.cline/`、`.clineignore`                                          | 运行时状态保存在 `~/.cline/`                              |
 | [CodeBuddy](#codebuddy)                           | `.codebuddy/settings.local.json`、`CODEBUDDY.local.md`                                                  | `CODEBUDDY.md`、`.codebuddy/` 其余内容                                               | `settings.local.json` 官方自动加入 `.gitignore`           |
@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Cursor](#cursor)                                 | —                                                                                                       | `.cursor/rules/`、`.cursorignore`                                                    | `.cursor/mcp.json` 可能含密钥                             |
 | [DeepSeek Harness](#deepseek-harness)             | `AGENTS.local.md`、`CLAUDE.local.md`                                                                    | `AGENTS.md`、`CLAUDE.md`                                                             | 本地覆盖文件“刻意不提交”                                  |
 | [Devin](#devin)                                   | —                                                                                                       | `.devin/wiki.json`、`AGENTS.md`                                                      | 云端代理；CLI 本地条目见 Windsurf 章节                    |
-| [Firebase Studio](#firebase-studio)               | `.idx/dev.local.nix`                                                                                    | `.idx/dev.nix`、`.idx/icon.png`                                                      | 官方文档直接给出 gitignore 示例；已宣布 sunset            |
+| [Firebase Studio](#firebase-studio)               | `.idx/dev.local.nix`                                                                                    | `.idx/dev.nix`、`.idx/icon.png`                                                      | 官方文档直接给出 `.gitignore` 示例；已宣布退役            |
 | [Gemini CLI](#gemini-cli)                         | —                                                                                                       | `GEMINI.md`、`.gemini/settings.json`、`.gemini/commands/`                            | 检查点保存在 `~/.gemini/`，不进项目                       |
 | [Gemini Code Assist](#gemini-code-assist)         | —                                                                                                       | `.gemini/config.yaml`、`.aiexclude`                                                  | IDE 插件与 GitHub 评审机器人，与 CLI 共用 `.gemini/`      |
 | [GitHub Copilot](#github-copilot)                 | —                                                                                                       | `.github/copilot-instructions.md`、`.github/instructions/`                           | CLI 运行时数据保存在 `~/.copilot/`                        |
@@ -77,7 +77,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Sourcegraph Cody](#sourcegraph-cody)             | —                                                                                                       | —                                                                                    | 上下文在服务端；检索遵循 `.gitignore`                     |
 | [Tabnine](#tabnine)                               | —                                                                                                       | `.tabnine/guidelines/`                                                               | 类 AGENTS.md 的项目指引                                   |
 | [Trae](#trae)                                     | —                                                                                                       | `.trae/rules/`                                                                       | 记忆数据保存在用户主目录                                  |
-| [Warp](#warp)                                     | —                                                                                                       | `WARP.md`、`.warp/workflows/`                                                        | 官方不存在 `.warp/rules/`                                 |
+| [Warp](#warp)                                     | —                                                                                                       | `WARP.md`、`.warp/workflows/`                                                        | 官方文档中不存在 `.warp/rules/`                           |
 | [Windsurf](#windsurf)                             | `AGENTS.local.md`、`.devin/config.local.json`、`.devin/mcp_config.local.json`                           | `.devin/`（rules、skills、config）、`.windsurf/`（旧版）                             | 2026 年 6 月更名为 Devin Desktop                          |
 | [ZCode](#zcode)                                   | `.zcode/`（或仅 `.zcode/plans/`）                                                                       | `AGENTS.md`、`.zcodeignore`、`.zcode/skills/`                                        | 会话计划属运行时产物                                      |
 | [Zed](#zed)                                       | —                                                                                                       | `.rules`、`.zed/`、`.agents/skills/`                                                 | 会话保存在 Zed 的用户数据目录                             |
@@ -316,7 +316,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- `AGENTS.local.md`、`CLAUDE.local.md` — 每个开发者的本地叠加文件，官方设计记录原文 "deliberately not committed"
+- `AGENTS.local.md`、`CLAUDE.local.md` — 每个开发者的本地覆盖文件，官方设计记录原文 "deliberately not committed"
 
 建议提交:
 
@@ -328,7 +328,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- 云端代理本身无本地产物 — 它在自己的 VM 中工作，通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 [Windsurf](#windsurf) 章节覆盖
+- 云端代理本身无本地产物 — 它在自己的 VM 中工作，通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 [Windsurf](#windsurf) 章节说明
 
 建议提交:
 
@@ -451,7 +451,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 > 文档: <https://github.com/iflow-ai/iflow-cli>
 
-> iFlow CLI 已于 2026 年 4 月 17 日停止服务，官方建议迁移至 Qoder。以下条目适用于存量仓库。
+> iFlow CLI 已于 2026 年 4 月 17 日停止服务，官方在告别帖（<https://vibex.iflow.cn/t/topic/4819>）中建议迁移至 Qoder。以下条目适用于存量仓库。
 
 建议忽略:
 
@@ -464,7 +464,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 视情况:
 
-- `.iflow/settings.json` — 项目设置可能含 `apiKey`、`baseUrl` 等字段，含凭据时请留在本地（官方无 .gitignore 建议）
+- `.iflow/settings.json` — 项目设置可能含 `apiKey`、`baseUrl` 等字段，含凭据时请留在本地（官方无 `.gitignore` 建议）
 
 ### [JetBrains AI Assistant](https://www.jetbrains.com/ai-assistant/)
 
@@ -823,12 +823,12 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 ## 参与贡献
 
-欢迎提交 Issue 与 Pull Request。维护规范——条目核实要求、文档结构、排序约定——见 [AGENTS.md](AGENTS.md)（当前以中文撰写）。发现条目与官方文档不符，欢迎提 Issue 反馈。
+欢迎提交 Issue 与 Pull Request。维护规范——条目核实要求、文档结构、排序约定——见 [AGENTS.md](AGENTS.md)。发现条目与官方文档不符，欢迎提 Issue 反馈。
 
 贡献速记：
 
 1. 每个条目必须有官方文档页或官方仓库作为出处，不收录猜测的路径。
-2. 每个条目归入 建议忽略（运行时状态、缓存、个人覆盖）、建议提交（规则、共享配置）、视情况（可能含密钥或个人偏好）之一。
+2. 每个条目归入 **建议忽略**（运行时状态、缓存、个人覆盖）、**建议提交**（规则、共享配置）、**视情况**（可能含密钥或个人偏好）之一。
 3. 四处同步：双语 README 与两个示例文件，并保持字母排序。
 4. 提交前运行 `deno task fmt` 与 `deno task test`。
 
