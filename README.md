@@ -157,7 +157,7 @@ Recommended to ignore:
 
 - `CLAUDE.local.md` — personal instructions; the docs say "Create it manually and add it to `.gitignore`"
 - `.claude/settings.local.json` — personal settings overriding project defaults. Claude Code adds `**/.claude/settings.local.json` to your global git excludes the first time it writes the file; add it to `.gitignore` yourself if you created the file by hand
-- `.claude/agent-memory-local/` — local agent memories, "keep out of version control"
+- `.claude/agent-memory-local/` — local agent memories; "To keep memory out of version control use `memory: local`, which writes to `.claude/agent-memory-local/` instead"
 
 Keep in version control:
 
@@ -406,7 +406,7 @@ Keep in version control:
 
 > Documentation: <https://github.com/iflow-ai/iflow-cli>
 
-> iFlow CLI was discontinued on April 17, 2026, and the vendor recommends migrating to Qoder. The entries below apply to existing repositories.
+> iFlow CLI was discontinued on April 17, 2026, and the vendor recommends migrating to Qoder in its farewell post (<https://vibex.iflow.cn/t/topic/4819>). The entries below apply to existing repositories.
 
 Recommended to ignore:
 
@@ -727,7 +727,7 @@ Notes:
 
 ### ZCode
 
-> Documentation: not publicly hosted; entries below reflect observed behavior in local workspaces
+> Documentation: <https://zcode.z.ai> — the public documentation does not describe these workspace paths; entries below reflect observed behavior in local workspaces
 
 Recommended to ignore:
 

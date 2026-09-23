@@ -3,9 +3,9 @@
 
 # agent-gitignore
 
-AI 编码框架（harness）——Claude Code、Cursor、Aider、Qwen Code 等——会在工作区里留下各种杂物：对话历史、计划文件、缓存、自动生成的技能、个人设置，它们大多不应进入版本管理。与此同时，一些看起来像杂物的文件——`AGENTS.md`、`.agents/`、`.zcodeignore`——恰恰是设计为提交共享的。
+AI 编码框架（harness）——Claude Code、Cursor、Aider、Qwen Code 等——会在工作区里留下各种杂物：对话历史、计划文件、缓存、自动生成的技能、个人设置，它们大多不应进入版本控制。与此同时，一些看起来像杂物的文件——`AGENTS.md`、`.agents/`、`.zcodeignore`——恰恰是设计为提交共享的。
 
-本仓库收集常见 AI 编码框架会在工作区创建、但很可能不希望纳入版本管理的文件，每一条目均经官方文档核实，并提供可直接使用的示例 `.gitignore` 文件。
+本仓库收集常见 AI 编码框架会在工作区创建，但很可能不希望纳入版本控制的文件，每一条目均经官方文档核实，并提供可直接使用的示例 `.gitignore` 文件。
 
 ## 快速开始
 
@@ -24,11 +24,11 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 - [examples/agent.gitignore](examples/agent.gitignore) — 完整版。凡有官方默认值之处遵循官方默认（例如 Aider 会自行忽略 `.aider*`），需要酌情判断的条目以注释形式标注。
 - [examples/agent-conservative.gitignore](examples/agent-conservative.gitignore) — 保守版，只含无歧义的运行时状态、缓存和个人文件，不会误伤任何可共享配置。
 
-关于 gitignore 语法：不带斜杠的模式在任意目录层级生效；`**/` 前缀可覆盖嵌套目录的每一层，因此 `**/.claude/settings.local.json` 对嵌套工作区同样有效。
+关于 gitignore 语法：不带斜杠的模式在任意目录层级生效；`**/` 前缀可覆盖嵌套目录的每一层，因此 `**/.claude/settings.local.json` 对嵌套工作树同样有效。
 
 ## 总览
 
-| 工具                                      | 建议忽略                                                                                                | 建议提交                                                                             | 备注                                            |
+| 框架                                      | 建议忽略                                                                                                | 建议提交                                                                             | 备注                                            |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------- |
 | [Aider](#aider)                           | `.aider*`                                                                                               | `.aider.conf.yml`、`.aiderignore`（如需共享）                                        | Aider 默认自动把 `.aider*` 写入 `.gitignore`    |
 | [Amazon Q Developer](#amazon-q-developer) | —                                                                                                       | `.amazonq/rules/`、`.amazonq/cli-agents/`                                            | 含 MCP 凭据的 agent JSON 走环境变量             |
@@ -73,9 +73,9 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 | [Warp](#warp)                             | —                                                                                                       | `WARP.md`、`.warp/workflows/`                                                        | 官方不存在 `.warp/rules/`                       |
 | [Windsurf](#windsurf)                     | `AGENTS.local.md`、`.devin/config.local.json`、`.devin/mcp_config.local.json`                           | `.devin/`（rules、skills、config）、`.windsurf/`（旧版）                             | 2026 年 6 月更名为 Devin Desktop                |
 | [ZCode](#zcode)                           | `.zcode/`（或仅 `.zcode/plans/`）                                                                       | `AGENTS.md`、`.zcodeignore`、`.zcode/skills/`                                        | 会话计划属运行时产物                            |
-| [Zed](#zed)                               | —                                                                                                       | `.rules`、`.zed/`、`.agents/skills/`                                                 | 会话保存在 Zed 用户数据目录                     |
+| [Zed](#zed)                               | —                                                                                                       | `.rules`、`.zed/`、`.agents/skills/`                                                 | 会话保存在 Zed 的用户数据目录                   |
 
-## 工具
+## 框架
 
 ### [Aider](https://aider.chat)
 
@@ -101,7 +101,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `.amazonq/rules/*.md` — 项目规则；官方文档流程明确 "Commit, review, and merge your changes"
-- `.amazonq/cli-agents/*.json` — 工作区级 agent 配置，官方说明通过 "via version control" 与团队共享（旧版 `.amazonq/mcp.json` 已并入这些 agent 文件）
+- `.amazonq/cli-agents/*.json` — 工作区级 agent 配置，官方说明可经版本控制与团队共享（"via version control"）（旧版 `.amazonq/mcp.json` 已并入这些 agent 文件）
 
 视情况:
 
@@ -118,7 +118,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `.amp/settings.json`（或 `.jsonc`）— 工作区设置，从当前目录向上搜索到仓库根
-- `.agents/setup`、`.agents/resume` — Orb 初始化脚本；官方在 2026 年 8 月专门推出"无需提交即可完成 setup"的功能，反向印证它们默认是被提交的
+- `.agents/setup`、`.agents/resume` — Orb 初始化脚本；官方在 2026 年 8 月专门推出"无需提交即可完成 setup"的功能，印证它们默认是被提交的
 
 ### [Augment Code](https://www.augmentcode.com)
 
@@ -147,7 +147,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 视情况:
 
-- 个人 Rules — 官方区分"个人 Rules"（个性化私有习惯）与项目规则，但未说明个人规则的项目内路径；私有内容请勿放入共享目录
+- 个人 Rules — 官方区分"个人 Rules"（个人偏好）与项目规则，但未说明个人规则的项目内路径；私有内容请勿放入共享目录
 
 ### [Claude Code](https://claude.ai/code)
 
@@ -304,7 +304,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- 云端代理本身无本地产物 — 它在自己的 VM 中工作、通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 Windsurf 章节覆盖
+- 云端代理本身无本地产物 — 它在自己的 VM 中工作，通过 PR 交付；Devin CLI 的个人文件（`.devin/config.local.json`、`.devin/mcp_config.local.json`）已在 Windsurf 章节覆盖
 
 建议提交:
 
@@ -330,7 +330,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 说明:
 
-- Google 已宣布 Firebase Studio 进入 sunset；以上条目适用于存量工作区
+- Google 已宣布 Firebase Studio 进入退役阶段（sunset）；以上条目适用于存量工作区
 
 ### [Gemini CLI](https://geminicli.com)
 
@@ -371,7 +371,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议提交:
 
-- `.agents/rules/`、`.agents/workflows/`、`.agents/skills/` — 工作区资产（旧版 `.agent/` 仍被读取；两者并存时复数 `.agents/` 优先）
+- `.agents/rules/`、`.agents/workflows/`、`.agents/skills/` — 工作区资产（旧版 `.agent/` 仍被读取；两者并存时带 s 的 `.agents/` 优先）
 - 项目根目录的 `GEMINI.md` 同样会被读取
 
 说明:
@@ -384,7 +384,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- `.goose/` — Memory 扩展把项目记忆自动写入 `.goose/memory/`，会话保存在 `~/.local/share/goose/sessions/`；官方无 .gitignore 建议，此条基于官方"自动存储"的描述
+- `.goose/` — Memory 扩展把项目记忆自动写入 `.goose/memory/`，会话保存在 `~/.local/share/goose/sessions/`；官方无 `.gitignore` 建议，此条基于官方"自动存储"的描述
 
 建议提交:
 
@@ -444,7 +444,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 建议提交:
 
 - `.junie/AGENTS.md` — 团队编码规范；旧版 `.junie/guidelines.md` 仍受支持
-- `.junie/plans/` — 官方明言 "editable, committable" 的可持续维护任务文档
+- `.junie/plans/` — 官方明言 "editable, committable" 的可长期维护的任务文档
 
 ### [Kilo Code](https://kilo.ai)
 
@@ -456,7 +456,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议提交:
 
-- `kilo.jsonc` — 项目配置；已提交的项目配置不能使用 `{env:VAR}` 引用，密钥请放全局配置
+- `kilo.jsonc` — 项目配置；已提交的项目配置不能使用 `{env:VAR}` 引用，密钥请放在全局配置中
 - `.kilo/rules/`（旧版 `.kilocode/rules/`）、`.kilocodeignore`
 
 视情况:
@@ -607,7 +607,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议提交:
 
-- `.replit`、`replit.nix` — `[gitHubImport]` 的 `requiredFiles` 默认值即这两项，设计上随仓库走
+- `.replit`、`replit.nix` — `[gitHubImport]` 的 `requiredFiles` 默认值即这两项，设计上随仓库一同提交
 
 视情况:
 
@@ -655,7 +655,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 视情况:
 
-- `.sourcegraph/instructions.md` — 早期版本的社区惯例；现行官方文档已不再描述它
+- `.sourcegraph/instructions.md` — 早期版本的社区惯例；现行官方文档已不再提及
 
 ### [Tabnine](https://www.tabnine.com)
 
@@ -727,7 +727,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 ### ZCode
 
-> 文档: 未公开托管；以下条目基于本地工作区的实际观察
+> 文档: <https://zcode.z.ai> — 公开文档未记载这些工作区路径；以下条目基于本地工作区的实际观察
 
 建议忽略:
 
@@ -745,7 +745,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 建议忽略:
 
-- 无 — 会话与线程保存在 Zed 用户数据目录，Zed 不会在项目内创建运行时文件
+- 无 — 会话与线程保存在 Zed 的用户数据目录，Zed 不会在项目内创建运行时文件
 
 建议提交:
 
@@ -754,7 +754,7 @@ curl -fsSL https://raw.githubusercontent.com/Leawind/agent-gitignore/main/exampl
 
 ## 请勿忽略这些文件
 
-以下文件看似 harness 杂物，实则设计为提交共享：
+以下文件看似框架杂物，实则设计为提交共享：
 
 - 根指令文件：`AGENTS.md`、`CLAUDE.md`、`GEMINI.md`、`QWEN.md`、`CODEBUDDY.md`
 - `.agents/` 目录 — 跨框架的技能目录，Codex、Zed、Replit、Google Antigravity 等都会读取
