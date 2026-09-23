@@ -22,6 +22,10 @@
 # !.aider.conf.yml
 # !.aiderignore
 
+# ---- Augment Code ----------------------------------------------------------
+# Officially "Automatically added to .gitignore and should not be committed".
+.augment/settings.local.json
+
 # ---- Claude Code -----------------------------------------------------------
 # Personal settings and private agent memories; Claude Code adds
 # **/.claude/settings.local.json to your global git excludes automatically,
@@ -35,6 +39,11 @@ CLAUDE.local.md
 .codebuddy/settings.local.json
 CODEBUDDY.local.md
 
+# ---- Crush -----------------------------------------------------------------
+# Runtime logs (./.crush/logs/crush.log); session state lives in the user
+# data directory outside the project.
+.crush/
+
 # ---- DeepSeek Harness ------------------------------------------------------
 # Additive local overlays, "deliberately not committed" per the official docs.
 AGENTS.local.md
@@ -45,6 +54,11 @@ CLAUDE.local.md
 .devin/config.local.json
 .devin/mcp_config.local.json
 # AGENTS.local.md is already covered by the DeepSeek Harness entry above.
+
+# ---- Goose -----------------------------------------------------------------
+# Project memories auto-written by the Memory Extension at .goose/memory/;
+# sessions live in the user data directory.
+.goose/
 
 # ---- Hermes Agent / Pi -----------------------------------------------------
 # Personal, per-directory override of AGENTS.md ("typically gitignored").
@@ -77,6 +91,13 @@ AGENTS.override.md
 # Locally installed Agent skills outside version control.
 .local/
 
+# ---- Serena ----------------------------------------------------------------
+# Language-server cache and the local config override. Serena writes its own
+# .serena/.gitignore with these entries on first activation; these lines
+# protect you before that happens.
+.serena/cache/
+.serena/project.local.yml
+
 # ---- ZCode -----------------------------------------------------------------
 # Session data such as plan files. If you share workspace skills/commands
 # through .zcode/, ignore only .zcode/plans/ instead.
@@ -91,5 +112,6 @@ AGENTS.override.md
 # .gemini/settings.json        # may contain personal settings
 # .devin/mcp_config.json       # shared MCP servers; strip secrets first
 # .codex/config.toml           # project-level Codex config
+# .kiro/settings/mcp.json      # workspace MCP servers; use ${VAR} refs or keep local
 # .kilo/tui.json               # personal terminal-UI preferences
 # .kilo/tui.jsonc

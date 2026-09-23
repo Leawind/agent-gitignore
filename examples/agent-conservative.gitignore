@@ -19,6 +19,9 @@
 .aider.llm.history
 .aider.tags.cache.*/
 
+# ---- Augment Code ----------------------------------------------------------
+.augment/settings.local.json
+
 # ---- Claude Code -----------------------------------------------------------
 **/.claude/settings.local.json
 .claude/agent-memory-local/
@@ -28,6 +31,9 @@ CLAUDE.local.md
 .codebuddy/settings.local.json
 CODEBUDDY.local.md
 
+# ---- Crush -----------------------------------------------------------------
+.crush/logs/
+
 # ---- DeepSeek Harness ------------------------------------------------------
 AGENTS.local.md
 CLAUDE.local.md
@@ -35,6 +41,9 @@ CLAUDE.local.md
 # ---- Devin Desktop (formerly Windsurf) -------------------------------------
 .devin/config.local.json
 .devin/mcp_config.local.json
+
+# ---- Goose -----------------------------------------------------------------
+.goose/memory/
 
 # ---- Hermes Agent / Pi -----------------------------------------------------
 AGENTS.override.md
@@ -59,6 +68,10 @@ AGENTS.override.md
 
 # ---- Replit ----------------------------------------------------------------
 .local/secondary_skills/
+
+# ---- Serena ----------------------------------------------------------------
+.serena/cache/
+.serena/project.local.yml
 
 # ---- ZCode -----------------------------------------------------------------
 # Keeps .zcode/skills/ and .zcode/commands/ shareable; only session plans
