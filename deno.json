@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "fmt": "deno fmt README.md README.zh.md AGENTS.md docs/",
+    "fmt": "deno fmt README.md README.zh.md AGENTS.md",
     "test": "bash scripts/test-gitignore.sh"
   },
   "fmt": {
